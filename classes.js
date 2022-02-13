@@ -1,6 +1,6 @@
 class Light {
   constructor(light, appendTo) {
-    this.number = light[0];
+    this.lightID = light[0];
     this.icon = icons[light[1].config.archetype];
     this.name = light[1].name;
     this.state = {
@@ -10,13 +10,8 @@ class Light {
       sat: light[1].state.sat,
     };
   }
-  getNumber() {return this.number;}
+  getlightID() {return this.lightID;}
   getIcon() {return this.icon;}
-  getColor() {
-    let color = HSVtoRGB(this.state);
-    // console.log(`rgb(${color.r},${color.g},${color.b})`);
-    return `rgb(${color.r},${color.g},${color.b})`;
-  }
   addToHtml(address) {
     let checkBoxState = "";
     if (this.state.on) checkBoxState = "checked=''";
@@ -25,7 +20,7 @@ class Light {
     this.name.split(" ").forEach(word => nameSpans += `<span>${word}</span>`);
 
     document.querySelector(address).innerHTML += `
-      <div class="light" id="light${this.getNumber()}">
+      <div class="light" id="light${this.getlightID()}">
         <div class="gradient">
           <div class="top">
             <svg class="icon" viewBox="0 0 32 32">
@@ -55,7 +50,7 @@ class Light {
     });
   }
   getDomAdress() {
-    return document.querySelector(`#light${this.getNumber()}`);
+    return document.querySelector(`#light${this.getlightID()}`);
   }
 
   lightSwitch(isOn) {
@@ -88,7 +83,7 @@ class Light {
       "bri": ${this.state.bri},
       "sat": ${this.state.sat},
       "hue": ${this.state.hue}
-    }`, `lights/${this.number}/state/`);
+    }`, `lights/${this.lightID}/state/`);
   }
 
 }
