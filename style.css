@@ -253,6 +253,14 @@ h1 {
   background: var(--white);
 }
 
+#scenes .scene .sceneGradient .blurEffect {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  -webkit-backdrop-filter: blur(8px);
+          backdrop-filter: blur(8px);
+}
+
 #zones {
   margin: 4px 0 24px 48px;
   display: -webkit-box;

@@ -137,7 +137,9 @@ class Scene {
         <div class="sceneName">
           ${nameSpans}
         </div>
-        <div class="sceneGradient"></div>
+        <div class="sceneGradient">
+          <div class="blurEffect"></div>
+        </div>
       </div>
     `;
 
