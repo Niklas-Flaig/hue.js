@@ -24,28 +24,18 @@ doHTML("GET", res => {
 }, "scenes");
 
 doHTML("GET", res => {
-  console.log(res);
   let lights = [];
 
   Object.entries(res).forEach(light => {
     const newLight = new Light(light);
 
-    document.querySelector("#lights").innerHTML += newLight.getHTMLtext();
+    newLight.addToHtml("#lights");
 
     lights.push(newLight);
   });
 
   lights.forEach(light => {
-
-    light.renderColor();
-
-    let checkBox = light.getDomAdress().querySelector(".switcher");
-
-    checkBox.addEventListener("click", () => {
-      light.setOnState(checkBox.checked);
-      light.renderColor();
-      light.lightSwitch();
-    });
+    light.addEventListeners();
   });
   
 }, "lights");
@@ -76,7 +66,7 @@ function doHTML(command, content, urlAddition = "") {
         http.onreadystatechange = () => {
           if (http.readyState === 4) {
             if (http.status === 200) {
-              console.log(http.responseText);
+              // console.log(http.responseText);
             } else {
               console.log("Error " + http.status);
             }

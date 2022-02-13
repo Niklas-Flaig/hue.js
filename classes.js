@@ -12,20 +12,19 @@ class Light {
   }
   getNumber() {return this.number;}
   getIcon() {return this.icon;}
-  setOnState(isOn) {this.state.on = isOn;}
   getColor() {
     let color = HSVtoRGB(this.state);
     // console.log(`rgb(${color.r},${color.g},${color.b})`);
     return `rgb(${color.r},${color.g},${color.b})`;
   }
-  getHTMLtext() {
+  addToHtml(address) {
     let checkBoxState = "";
     if (this.state.on) checkBoxState = "checked=''";
 
     let nameSpans = "";
     this.name.split(" ").forEach(word => nameSpans += `<span>${word}</span>`);
 
-    return `
+    document.querySelector(address).innerHTML += `
       <div class="light" id="light${this.getNumber()}">
         <div class="gradient">
           <div class="top">
@@ -44,26 +43,52 @@ class Light {
         </div>
       </div>
     `;
+
+    // add the color
+    this.renderState();
+  }
+  addEventListeners() {
+    let checkBox = this.getDomAdress().querySelector(".switcher");
+
+    checkBox.addEventListener("click", () => {
+      this.lightSwitch(checkBox.checked);
+    });
   }
   getDomAdress() {
     return document.querySelector(`#light${this.getNumber()}`);
   }
-  renderColor() {
-    // get the color
-    let color = HSVtoRGB(this.state);
 
-    // check if the lights on or of
-    if (this.state.on) {
-      this.getDomAdress().setAttribute("style", `background: rgb(${color.r},${color.g},${color.b})`);
-    } else {
-      this.getDomAdress().setAttribute("style", "background: #272727");
-    }
-
+  lightSwitch(isOn) {
+    this.state.on = isOn;
+    this.renderState();
+    this.sendState();
   }
 
-  lightSwitch() {
-    doHTML("PUT", `{"on": ${this.state.on}}`, `lights/${this.number}/state/`);
-    this.state.on = !this.state.on;
+  renderState() {
+    // get the color
+    let color;
+    if (this.state.on) {
+      // check if the lights on or of
+      color = HSVtoRGB(this.state);
+    } else {
+      color = {
+        r: 39,
+        g: 39,
+        b: 39,
+      };
+    }
+    
+    this.getDomAdress().setAttribute("style", `background: rgb(${color.r},${color.g},${color.b})`);
+  }
+
+
+  sendState() {
+    doHTML("PUT", `{
+      "on": ${this.state.on},
+      "bri": ${this.state.bri},
+      "sat": ${this.state.sat},
+      "hue": ${this.state.hue}
+    }`, `lights/${this.number}/state/`);
   }
 
 }
