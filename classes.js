@@ -96,25 +96,47 @@ class Scene {
       return {
         lightID: light[0],
         state: {
-          on: light[1].on
+          on: light[1].on,
+          bri: light[1].bri,
+          x: light[1].xy[0],
+          y: light[1].xy[1],
         },
       };
     });
   }
   getSceneID() {return this.sceneID;}
   getName() {return this.name;}
+  renderState() {
+    // get the color
+    let gradientColors = this.lights.map(light => {
+      return XYtoRGB(light.state);
+    });
+
+    let gradient = "";
+
+    for (let a = 0; a < gradientColors.length; a++) {
+      const color = gradientColors[a];
+      gradient += `,rgb(${color.r},${color.g},${color.b}) ${a * (100 / (gradientColors.length - 1))}%`;
+    }
+    console.log(gradient);
+    
+    // set the gradient
+    this.getDomAdress().querySelector(".sceneGradient").setAttribute("style", `background-image: linear-gradient(90deg${gradient})`);
+  }
 
   addToHtml(address) {
     let nameSpans = "";
     this.name.split(" ").forEach(word => nameSpans += `<span>${word}</span>`);
 
     document.querySelector(address).innerHTML += `
-      <div class="scene">
+      <div class="scene" id="scene${this.getSceneID()}">
         <div class="sceneName">
           ${nameSpans}
         </div>
         <div class="sceneGradient"></div>
       </div>
     `;
+
+    this.renderState();
   }
 }
