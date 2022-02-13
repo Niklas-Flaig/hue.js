@@ -6,73 +6,8 @@ const icons = {
   bed: `<path d="M26,16 L6,16 C3.791,16 2,17.791 2,20 L2,22 C2,22.553 2.447,23 3,23 L4,23 L4,24 C4,25.104 4.896,26 6,26 C7.104,26 8,25.104 8,24 L8,23 L24,23 L24,24 C24,25.104 24.896,26 26,26 C27.104,26 28,25.104 28,24 L28,23 L29,23 C29.553,23 30,22.553 30,22 L30,20 C30,17.791 28.209,16 26,16 M9,10 L14,10 C14.553,10 15,10.447 15,11 C15,11.553 14.553,12 14,12 L9,12 C8.447,12 8,11.553 8,11 C8,10.447 8.447,10 9,10 M18,10 L23,10 C23.553,10 24,10.447 24,11 C24,11.553 23.553,12 23,12 L18,12 C17.447,12 17,11.553 17,11 C17,10.447 17.447,10 18,10 M7.009,14 L24.991,14 C25.549,14 26,13.549 26,12.991 L26,8 C26,6.896 25.104,6 24,6 L8,6 C6.896,6 6,6.896 6,8 L6,12.991 C6,13.549 6.451,14 7.009,14"></path>`,
 };
 
-class Light {
-  constructor(light, appendTo) {
-    this.number = light[0];
-    this.icon = icons[light[1].config.archetype];
-    this.name = light[1].name;
-    this.state = {
-      on: light[1].state.on,
-      bri: light[1].state.bri,
-      hue: light[1].state.hue,
-      sat: light[1].state.sat,
-    };
-  }
-  getNumber() {return this.number;}
-  getIcon() {return this.icon;}
-  setOnState(isOn) {this.state.on = isOn;}
-  getColor() {
-    let color = HSVtoRGB(this.state);
-    // console.log(`rgb(${color.r},${color.g},${color.b})`);
-    return `rgb(${color.r},${color.g},${color.b})`;
-  }
-  getHTMLtext() {
-    let checkBoxState = "";
-    if (this.state.on) checkBoxState = "checked=''";
 
-    let nameSpans = "";
-    this.name.split(" ").forEach(word => nameSpans += `<span>${word}</span>`);
 
-    return `
-      <div class="light" id="light${this.getNumber()}">
-        <div class="gradient">
-          <div class="top">
-            <svg class="icon" viewBox="0 0 32 32">
-              ${this.getIcon()}
-            </svg>
-            <div class="lightName">
-              ${nameSpans}
-            </div>
-          </div>
-          <div class="bottom">
-            <label class="toggle">
-              <input class="switcher" type="checkbox" ${checkBoxState}>
-            </label>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-  getDomAdress() {
-    return document.querySelector(`#light${this.getNumber()}`);
-  }
-  renderColor() {
-    // get the color
-    let color = HSVtoRGB(this.state);
-
-    // check if the lights on or of
-    if (this.state.on) {
-      this.getDomAdress().setAttribute("style", `background: rgb(${color.r},${color.g},${color.b})`);
-    } else {
-      this.getDomAdress().setAttribute("style", "background: #272727");
-    }
-
-  }
-
-  lightSwitch() {
-    doHTML("PUT", `{"on": ${this.state.on}}`, `lights/${this.number}/state/`);
-    this.state.on = !this.state.on;
-  }
 
 }
 
