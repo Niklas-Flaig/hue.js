@@ -8,10 +8,20 @@ const icons = {
 
 
 
+doHTML("GET", res => {
+  // in the res the lightstates arent represented
+  let scenes = [];
 
-}
+  // get the data for each individual scene
+  Object.entries(res).forEach(scene => doHTML("GET", sceneRes => {
+    console.log(sceneRes);
+    const newScene = new Scene(scene[0], sceneRes);
 
-doHTML("GET", res => console.log(res), "scenes/62xmqLOvWsbHsbZ");
+    newScene.addToHtml("#scenes");
+
+  }, "scenes/" + scene[0]));
+
+}, "scenes");
 
 doHTML("GET", res => {
   console.log(res);

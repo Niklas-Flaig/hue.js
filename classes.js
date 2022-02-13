@@ -68,3 +68,33 @@ class Light {
 
 }
 
+class Scene {
+  constructor(sceneID, scene) {
+    this.sceneID = sceneID;
+    this.name = scene.name;
+    this.lights = Object.entries(scene.lightstates).map(light => {
+      return {
+        lightID: light[0],
+        state: {
+          on: light[1].on
+        },
+      };
+    });
+  }
+  getSceneID() {return this.sceneID;}
+  getName() {return this.name;}
+
+  addToHtml(address) {
+    let nameSpans = "";
+    this.name.split(" ").forEach(word => nameSpans += `<span>${word}</span>`);
+
+    document.querySelector(address).innerHTML += `
+      <div class="scene">
+        <div class="sceneName">
+          ${nameSpans}
+        </div>
+        <div class="sceneGradient"></div>
+      </div>
+    `;
+  }
+}
