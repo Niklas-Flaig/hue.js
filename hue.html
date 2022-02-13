@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Niklas Flaig</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <div id="header"></div>
+
+    <div id="content">
+      <h1>Szenen</h1>
+      <div id="scenes">
+
+        <div class="scene">
+          <div class="sceneName">
+            <span>Szenen</span>
+            <span>Name</span>
+          </div>
+          <div class="sceneGradient"></div>
+        </div>
+        
+        <div class="scene"></div>
+        <div class="scene"></div>
+        <div class="scene"></div>
+        <div class="scene"></div>
+        <div class="scene"></div>
+        <div class="scene"></div>
+        <div class="scene"></div>
+        <div class="scene"></div>
+        <div class="scene"></div>
+      </div>
+
+      <h1>Lampen</h1>
+
+      <div id="zones">
+
+        <div class="zone">
+          <div class="top">
+
+            <span class="zoneName">ZonenName</span>
+  
+            <label class="toggleSmall">
+              <input class="switcher" type="checkbox">
+            </label>
+
+          </div>
+          <div class="slider">
+            <div class="progress"></div>
+            <div class="sliderShadow"></div>
+            <input min="1" max="100" value="50" type="range">
+          </div>
+
+        </div>
+        
+        <div class="zone">
+          <div class="top">
+
+            <span class="zoneName">ZonenName</span>
+  
+            <label class="toggleSmall">
+              <input class="switcher" type="checkbox">
+            </label>
+
+          </div>
+          <div class="slider">
+            <div class="progress"></div>
+            <div class="sliderShadow"></div>
+            <input min="1" max="100" value="50" type="range">
+          </div>
+
+        </div>
+
+        <div class="zone">
+          <div class="top">
+
+            <span class="zoneName">ZonenName</span>
+  
+            <label class="toggleSmall">
+              <input class="switcher" type="checkbox">
+            </label>
+
+          </div>
+          <div class="slider">
+            <div class="progress"></div>
+            <div class="sliderShadow"></div>
+            <input min="1" max="100" value="50" type="range">
+          </div>
+
+        </div>
+
+      </div>
+
+      <div id="lights">
+        
+      </div>
+    </div>
+    <script>
+      document.querySelectorAll(".slider").forEach(slider => {
+        const range = slider.querySelector("input[type=range]");
+        range.addEventListener("input", () => {
+
+          const prog = slider.querySelector(".progress");
+
+          const width = Math.max(slider.offsetWidth / 100 * range.value, 10);
+
+          prog.style.width = `${width}px`;
+          prog.style["margin-right"] = `${0-width}px`;
+        });
+      });
+
+    </script>
+    <script src="env.js"></script>
+    <script src="hue.js"></script>
+  </body>
+
+</html>
