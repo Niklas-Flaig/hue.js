@@ -106,6 +106,10 @@ class Scene {
   }
   getSceneID() {return this.sceneID;}
   getName() {return this.name;}
+  getDomAdress() {
+    return document.querySelector(`#scene${this.getSceneID()}`);
+  }
+  
   renderState() {
     // get the color
     let gradientColors = this.lights.map(light => {
