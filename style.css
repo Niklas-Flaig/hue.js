@@ -12,6 +12,7 @@
   --gradientGroup: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.24) 80%, rgba(0, 0, 0, 0.4) 100%);
   --gradientLight: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.24) 66%, rgba(0, 0, 0, 0.36) 100%);
   --gradientLightBottom: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(24, 24, 24, 0.4) 100%);
+  --defaultFont: 18px;
   --basicMargin: 24px;
   --corners: 12px;
 }
@@ -237,7 +238,7 @@ h1 {
   font-family: Arial;
   font-style: normal;
   font-weight: bold;
-  font-size: 18px;
+  font-size: var(--defaultFont);
   line-height: 22.5px;
   text-justify: center;
   color: var(--white);
@@ -311,7 +312,7 @@ h1 {
   font-family: Arial;
   font-style: normal;
   font-weight: bold;
-  font-size: 18px;
+  font-size: var(--defaultFont);
   line-height: 22.5px;
   color: var(--white);
 }
@@ -418,7 +419,7 @@ h1 {
   font-family: Arial;
   font-style: normal;
   font-weight: bold;
-  font-size: 18px;
+  font-size: var(--defaultFont);
   line-height: 22.5px;
   text-justify: center;
   color: var(--white);
