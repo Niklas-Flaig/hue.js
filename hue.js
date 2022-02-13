@@ -128,3 +128,28 @@ function HSVtoRGB(val) {
 
   return {r: red, g: green, b: blue};
 }
+
+function XYtoRGB(val) {
+  let x = val.x;
+  let y = val.y;
+  let z = 1.0 - x - y;
+  let newY = val.bri; // The given brightness value
+  let newX = (newY / y) * x;
+  let newZ = (newY / y) * z;
+
+  console.log(newX,newY,newZ);
+
+  let r =  newX * 1.656492 - newY * 0.354851 - newZ * 0.255038;
+  let g = -newX * 0.707196 + newY * 1.655397 + newZ * 0.036152;
+  let b =  newX * 0.051713 - newY * 0.121364 + newZ * 1.011530;
+
+  // r = r <= 0.0031308 ? 12.92 * r : (1.055) * Math.pow(r, (1.0 / 2.4)) - 0.055;
+  // g = g <= 0.0031308 ? 12.92 * g : (1.055) * Math.pow(g, (1.0 / 2.4)) - 0.055;
+  // b = b <= 0.0031308 ? 12.92 * b : (1.055) * Math.pow(b, (1.0 / 2.4)) - 0.055;
+
+  return {
+    r: r,
+    g: g,
+    b: b
+  };
+}
