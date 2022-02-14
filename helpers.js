@@ -152,7 +152,7 @@ const colorMath = {
   
     return {hue: hue, sat: sat, bri: bri};
   },
-  XYtoRGB: (cPoint) => {
+  XYtoRGB: (cPoint, bri = 255) => {
     const rPoint = {x: 0.6915, y: 0.3038};
     const gPoint = {x: 0.17, y: 0.7};
     const bPoint = {x: 0.1532, y: 0.0475};
@@ -163,6 +163,8 @@ const colorMath = {
       g: 0,
       b: 0
     };
+
+    let saturation = 0;
   
     if (geometry.points.match(cPoint, wPoint)) { // when the color is white
       // its a greyTone
@@ -198,6 +200,9 @@ const colorMath = {
         } else {
           console.log("you still forgot some cases in color determination");
         }
+
+        saturation = geometry.points.procentualDistance(cPoint, brPoint, wPoint);
+
       } else if (!isNaN(rgPoint.x + rgPoint.y) && geometry.points.inBetweenAB(rgPoint, rPoint, gPoint) && (geometry.points.inBetweenAB(cPoint, wPoint, rgPoint) || geometry.points.afterAB(cPoint, wPoint, rgPoint))) {
         console.log("2");
         if (geometry.points.inBetweenAB(rgPoint, geometry.points.middlePoint(rPoint, gPoint), gPoint)) {
@@ -220,6 +225,10 @@ const colorMath = {
         } else {
           console.log("you still forgot some cases in color determination");
         }
+        
+        // datermine the saturation
+        saturation = geometry.points.procentualDistance(cPoint, rgPoint, wPoint);
+
       } else if (!isNaN(gbPoint.x + gbPoint.y) && geometry.points.inBetweenAB(gbPoint, gPoint, bPoint) && (geometry.points.inBetweenAB(cPoint, wPoint, gbPoint) || geometry.points.afterAB(cPoint, wPoint, gbPoint))) {
         if (geometry.points.inBetweenAB(gbPoint, geometry.points.middlePoint(gPoint, bPoint), bPoint)) {
           // the crossing point sits on the more-blue half of the greenBlue line
@@ -241,9 +250,19 @@ const colorMath = {
         } else {
           console.log("you still forgot some cases in color determination");
         }
+
+        saturation = geometry.points.procentualDistance(cPoint, gbPoint, wPoint);
+
       } else {
         console.log("AnotherColorError?");
       }
+
+      // apply saturation and brigthness to the color
+      color.r = map(saturation, 0, 1, color.r, 1) * bri;
+      color.g = map(saturation, 0, 1, color.g, 1) * bri;
+      color.b = map(saturation, 0, 1, color.b, 1) * bri;
+
+      return color;
     }
   },
   sortRGBvalues: (colors) => {
