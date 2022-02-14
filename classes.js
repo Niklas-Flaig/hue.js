@@ -64,7 +64,7 @@ class Light {
     let color;
     if (this.state.on) {
       // check if the lights on or of
-      color = HSVtoRGB(this.state);
+      color = colorMath.HSVtoRGB(this.state);
     } else {
       color = {
         r: 39,
@@ -93,15 +93,27 @@ class Scene {
     this.sceneID = sceneID;
     this.name = scene.name;
     this.lights = Object.entries(scene.lightstates).map(light => {
-      return {
+      let lightEntry = {
         lightID: light[0],
         state: {
-          on: light[1].on,
-          bri: light[1].bri,
-          x: light[1].xy[0],
-          y: light[1].xy[1],
-        },
+          on: light[1].on
+        }
       };
+      // there are some various ways, a light can store data
+      if (light[1].on === false) {
+        lightEntry.lightMode = "off";
+
+      } else if (light[1].xy !== undefined) {
+        lightEntry.lightMode = "xy";
+        lightEntry.state.bri= light[1].bri;
+        lightEntry.state.x = light[1].xy[0];
+        lightEntry.state.y = light[1].xy[1];
+        
+      } else if (light[1].ct !== undefined) {
+        lightEntry.lightMode = "ct";
+        //TODO
+      }
+      return lightEntry;
     });
   }
   getSceneID() {return this.sceneID;}
@@ -111,10 +123,20 @@ class Scene {
   }
   
   renderState() {
-    // get the color
-    let gradientColors = this.lights.map(light => {
-      return XYtoRGB(light.state);
+    // get the colors
+    let gradientColors = [];
+
+    // just pushes the possible colors
+    this.lights.forEach(light => {
+      if (light.lightMode === "xy") {
+        gradientColors.push(colorMath.XYtoRGB(light.state));
+      } else if (light.lightMode === "ct") {
+        //TODO
+      }
     });
+
+    gradientColors = colorMath.sortRGBvalues(gradientColors);
+    console.log(gradientColors);
 
     let gradient = "";
 
@@ -122,7 +144,6 @@ class Scene {
       const color = gradientColors[a];
       gradient += `,rgb(${color.r},${color.g},${color.b}) ${a * (100 / (gradientColors.length - 1))}%`;
     }
-    console.log(gradient);
     
     // set the gradient
     this.getDomAdress().querySelector(".sceneGradient").setAttribute("style", `background-image: linear-gradient(90deg${gradient})`);
