@@ -164,6 +164,7 @@ const colorMath = {
       b: 0
     };
 
+    //! The saturation of 0 means maximal saturation uffff
     let saturation = 0;
   
     if (geometry.points.match(cPoint, wPoint)) { // when the color is white
