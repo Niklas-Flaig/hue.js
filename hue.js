@@ -186,3 +186,30 @@ function XYtoRGB(val) {
     b: b
   };
 }
+
+
+// sorts the rgb values to create smoother gradients
+function sortRGBvalues(colors) {
+  let newColors = [];
+  
+  colors.forEach(color => {
+    // convert rgb to hsv
+    color.degree = RGBtoHSV(color).hue + 0;
+    // green has to be the degree startpoint
+
+    let added = false;
+    
+    for (let a = 0; a < newColors.length; a++) {
+      const existingColor = newColors[a];
+      // check if the color.hue got higher than an existing one, put it in front of it
+      if (color.degree < existingColor.degree) {
+        newColors.splice(a, 0, color);
+        added = true;
+        break;
+      }
+    }
+    if (!added) newColors.push(color);
+  });
+
+  return newColors;
+}
