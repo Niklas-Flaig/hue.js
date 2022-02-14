@@ -132,6 +132,36 @@ function HSVtoRGB(val) {
   return {r: red, g: green, b: blue};
 }
 
+function RGBtoHSV(val) {
+  let r = val.r / 255;
+  let g = val.g / 255;
+  let b = val.b / 255;
+  let chromeMax = Math.max(r, g, b);
+  let chromeMin = Math.min(r, g, b);
+
+  let hue, sat, bri;
+
+  if (chromeMax === chromeMin) { // a grey value
+    hue = 0;
+  } else if (r === chromeMax) { // a mainly red value
+    hue = 60 * ((g - b) / (chromeMax - chromeMin));
+  } else if (g === chromeMax) { // a mainly green value
+    hue = 60 * ((b - r) / (chromeMax - chromeMin) + 2);
+  } else if (b === chromeMax) { // a mainly blue value
+    hue = 60 * ((r - g) / (chromeMax - chromeMin) + 4);
+  }
+
+  if (chromeMax === 0) {
+    sat = 0;
+  } else {
+    sat = (chromeMax - chromeMin) / chromeMax;
+  }
+
+  bri = chrome;
+
+  return {hue: hue, sat: sat, bri: bri};
+}
+
 function XYtoRGB(val) {
   let x = val.x;
   let y = val.y;
