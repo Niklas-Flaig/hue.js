@@ -213,3 +213,102 @@ function sortRGBvalues(colors) {
 
   return newColors;
 }
+
+
+function a (cPoint) {
+  const rPoint = {x: 0.6915, y: 0.3038};
+  const gPoint = {x: 0.17, y: 0.7};
+  const bPoint = {x: 0.1532, y: 0.0475};
+  const wPoint = {x: 0.3127, y: 0.329};
+
+
+  const linesCrossingPoint = (lineA, lineB) => {
+    // determines the crossing Point of two lines
+    let crossingPoint = {};
+    
+    lineA.m = (lineA[0].y - lineA[1].y) / (lineA[0].x - lineA[1].x);
+    lineA.p = lineA[0].y - (lineA.m * lineA[0].x);
+
+    lineB.m = (lineB[0].y - lineB[1].y) / (lineB[0].x - lineB[1].x);
+    lineB.p = lineB[0].y - (lineB.m * lineB[0].x);
+
+
+    crossingPoint.x = (lineB.p - lineA.p) / (lineA.m - lineB.m);
+    crossingPoint.y = lineA.m * crossingPoint.x + lineA.p;
+
+    return crossingPoint;
+  };
+
+  const checkIfPointInbetween = (pointM, pointA, pointB) => {
+    const distanceAB = Math.abs(pointA.x - pointB.x);
+    const distanceMA = Math.abs(pointM.x - pointA.x);
+    const distanceMB = Math.abs(pointM.x - pointB.x);
+
+    if (distanceMA <= distanceAB && distanceMB <= distanceAB) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const checkIfPointOutsideButMoreNearToTheLastPoint = (pointM, pointA, pointB) => {
+    const distanceAB = Math.abs(pointA.x - pointB.x);
+    const distanceMA = Math.abs(pointM.x - pointA.x);
+    const distanceMB = Math.abs(pointM.x - pointB.x);
+
+    if (distanceMA >= distanceAB && distanceMB <= distanceMA) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+
+  const middlePoint = (pointA, pointB) => {
+    return {
+      x: (pointA.x + pointB.x) / 2,
+      y: (pointA.y + pointB.y) / 2
+    };
+  };
+  
+  if (cPoint.x === wPoint.x && cPoint.y === wPoint.y) { // when the color is white
+    // its a greyTone
+  } else {
+    // get the crossing point of the white-color line and the traiingle sides
+    let brPoint = linesCrossingPoint([bPoint, rPoint], [cPoint, wPoint]);
+    let rgPoint = linesCrossingPoint([rPoint, gPoint], [cPoint, wPoint]);
+    let gbPoint = linesCrossingPoint([gPoint, bPoint], [cPoint, wPoint]);
+
+    // 1. checks if its a number
+    // 2. checks if the crossingPoint of a line with is inside the line from blue to red (if not, then the colour isnt in this Part of the triangle)
+    // 3. if the cPoint is either between the wPoint and the brPoint (inside the triangle) or outside of the triangle, but more near to the brPoint
+    if (!isNaN(brPoint.x + brPoint.y) && checkIfPointInbetween(brPoint, bPoint, rPoint) && (checkIfPointInbetween(cPoint, wPoint, brPoint) || checkIfPointOutsideButMoreNearToTheLastPoint(cPoint, wPoint, brPoint))) {
+      console.log("1");
+      if (checkIfPointInbetween(brPoint, middlePoint(bPoint, rPoint), rPoint)) {
+        // the crossing point sits on the more-red half of the blueRed line
+        console.log("A red - blue color");
+      } else if (checkIfPointInbetween(brPoint, middlePoint(bPoint, rPoint), bPoint)) {
+        // the crossing point sits on the more-blue half of the blueRed line
+        console.log("A blue - red color");
+      }
+    } else if (!isNaN(rgPoint.x + rgPoint.y) && checkIfPointInbetween(rgPoint, rPoint, gPoint) && (checkIfPointInbetween(cPoint, wPoint, rgPoint) || checkIfPointOutsideButMoreNearToTheLastPoint(cPoint, wPoint, rgPoint))) {
+      console.log("2");
+      if (checkIfPointInbetween(rgPoint, middlePoint(rPoint, gPoint), gPoint)) {
+        // the crossing point sits on the more-green half of the green-red line
+        console.log("A green - red color");
+      } else if (checkIfPointInbetween(rgPoint, middlePoint(rPoint, gPoint), rPoint)) {
+        // the crossing point sits on the more-red half of the green-red line
+        console.log("A red - green color");
+      }
+    } else if (!isNaN(gbPoint.x + gbPoint.y) && checkIfPointInbetween(gbPoint, gPoint, bPoint) && (checkIfPointInbetween(cPoint, wPoint, gbPoint) || checkIfPointOutsideButMoreNearToTheLastPoint(cPoint, wPoint, gbPoint))) {
+      console.log("3");
+      if (checkIfPointInbetween(gbPoint, middlePoint(gPoint, bPoint), bPoint)) {
+        // the crossing point sits on the more-blue half of the greenBlue line
+        console.log("A blue - green color");
+      } else if (checkIfPointInbetween(gbPoint, middlePoint(gPoint, bPoint), gPoint)) {
+        // the crossing point sits on the more-green half of the greenBlue line
+        console.log("A green - blue color");
+      }
+    }
+  }
+}
