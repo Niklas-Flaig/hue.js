@@ -271,7 +271,7 @@ const colorMath = {
     
     colors.forEach(color => {
       // convert rgb to hsv
-      color.degree = RGBtoHSV(color).hue + 0;
+      color.degree = colorMath.RGBtoHSV(color).hue + 0;
       // green has to be the degree startpoint
   
       let added = false;
