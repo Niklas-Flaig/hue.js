@@ -66,17 +66,13 @@ class Light {
     let checkBox = this.getDomAdress().querySelector(".switcher");
 
     checkBox.addEventListener("click", () => {
-      this.lightSwitch(checkBox.checked);
+      this.state.on = checkBox.checked;
+      this.renderState();
+      this.sendState();
     });
   }
   getDomAdress() {
     return document.querySelector(`#light${this.getlightID()}`);
-  }
-
-  lightSwitch(isOn) {
-    this.state.on = isOn;
-    this.renderState();
-    this.sendState();
   }
 
   renderState() {
