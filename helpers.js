@@ -311,7 +311,8 @@ var timeOutID;
 
 var inactiveTimeOutID;
 
-function t(callback, time, inactiveTime = 1000) {
+// the pre-set values are the lowest it can get to acces the bridge lag-free
+function throttle(callback, time = 500, inactiveTime = 300) {
   gotInput = true;
 
   if (!executing) inner();
@@ -325,11 +326,10 @@ function t(callback, time, inactiveTime = 1000) {
       executing = false;
       
       // if the function got called, while this timeout was active repeat repeat this function
-      if (gotInput) {
-        inner();
-        gotInput = false;
-      }
-    }, time);
+      /* this part isnt really neccessary, because of the clearTimeout below, wich
+         would delete this timeout when there is no Input*/
+      if (gotInput) gotInput = false; inner();
+    }, Math.max(time, 500));
   }
 
   // kill preivious inactiveTimeOut
@@ -340,5 +340,5 @@ function t(callback, time, inactiveTime = 1000) {
     clearTimeout(timeOutID);
     callback();
     executing = false;
-  }, inactiveTime);
+  }, Math.max(inactiveTime, 500));
 }
