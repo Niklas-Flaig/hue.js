@@ -88,7 +88,7 @@ const colorMath = {
     // transforms a hsv-value to a rgb-value
     let sat = map(val.sat, 0, 254, 0, 1);
     let bri = map(val.bri, 0, 254, 0, 1);
-    let chrome = sat*bri;
+    let chrome = sat * bri;
     let hue = map(val.hue, 0, 65535, 0, 360);
   
     let x = chrome * (1 - Math.abs(((hue/60.0) % 2 ) - 1));
