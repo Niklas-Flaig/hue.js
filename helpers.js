@@ -75,6 +75,15 @@ function map(value, minStart, maxStart, minGoal, maxGoal) {
 }
 
 const colorMath = {
+  RGBmaxSaturation: (val) => {
+    let maxVal = Math.max(val.r, val.g, val.b);
+
+    return {
+      r: map(val.r, 0, maxVal, 0, 255),
+      g: map(val.g, 0, maxVal, 0, 255),
+      b: map(val.b, 0, maxVal, 0, 255)
+    };
+  },
   HSVtoRGB: (val) => {
     // transforms a hsv-value to a rgb-value
     let sat = map(val.sat, 0, 254, 0, 1);
