@@ -32,7 +32,6 @@ doHTML("GET", res => {
   }, "scenes/" + scene[0]));
   
   scenes.forEach(scene => {
-    console.log("HIaaaaa");
     scene.addEventListeners();
   });
 
