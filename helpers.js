@@ -305,40 +305,35 @@ const colorMath = {
   },
 };
 
-var executing = false;
-var gotInput = false;
-var timeOutID;
-
-var inactiveTimeOutID;
 
 // the pre-set values are the lowest it can get to acces the bridge lag-free
-function throttle(callback, time = 500, inactiveTime = 300) {
-  gotInput = true;
+function throttle(callback, time = 600, inactiveTime = 300) {
+  this.gotInput = true;
 
-  if (!executing) inner();
+  if (!this.executing) inner();
 
   function inner () {
-    executing = true;
+    this.executing = true;
 
-    timeOutID = setTimeout(() => {
+    this.timeOutID = setTimeout(() => {
 
       callback();
-      executing = false;
+      this.executing = false;
       
       // if the function got called, while this timeout was active repeat repeat this function
       /* this part isnt really neccessary, because of the clearTimeout below, wich
          would delete this timeout when there is no Input*/
-      if (gotInput) gotInput = false; inner();
-    }, Math.min(time, 500));
+      if (this.gotInput) this.gotInput = false; inner();
+    }, Math.max(time, 500));
   }
 
   // kill preivious inactiveTimeOut
-  clearTimeout(inactiveTimeOutID);
-  inactiveTimeOutID = setTimeout(() => {
+  clearTimeout(this.inactiveTimeOutID);
+  this.inactiveTimeOutID = setTimeout(() => {
     // if there is no calling of this function (till this timeout resolves)
     // it doesnt get killed and can resolve: it will kill the main-Timeout and call the callback imediately
-    clearTimeout(timeOutID);
+    clearTimeout(this.timeOutID);
     callback();
-    executing = false;
-  }, Math.min(inactiveTime, 300)); // this minValue has to be smaller than the upper
-};
+    this.executing = false;
+  }, Math.max(inactiveTime, 300)); // this minValue has to be smaller than the upper
+}
