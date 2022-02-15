@@ -163,6 +163,11 @@ h1 {
   }
 }
 
+#content {
+  display: flex;
+  flex-direction: row;
+}
+
 #header {
   height: 104px;
   background: var(--white);
@@ -244,7 +249,7 @@ h1 {
   margin: 4px 0 24px 48px;
 
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: fit-content;
   
   
@@ -252,7 +257,7 @@ h1 {
     box-sizing: border-box;
     width: 320px;
     height: 88px;
-    margin: 0 8px;
+    margin: 0px 8px 16px 8px;
 
     padding: 16px 20px;
 

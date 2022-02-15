@@ -164,6 +164,16 @@ h1 {
   cursor: pointer;
 }
 
+#content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
 #header {
   height: 104px;
   background: var(--white);
@@ -272,10 +282,10 @@ h1 {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
+  -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+      -ms-flex-direction: column;
+          flex-direction: column;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -286,7 +296,7 @@ h1 {
           box-sizing: border-box;
   width: 320px;
   height: 88px;
-  margin: 0 8px;
+  margin: 0px 8px 16px 8px;
   padding: 16px 20px;
   border-radius: var(--corners);
   background: var(--gradientGroup), #8DD3B5;
