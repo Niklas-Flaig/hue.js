@@ -304,3 +304,41 @@ const colorMath = {
     return newColors;
   },
 };
+
+var executing = false;
+var gotInput = false;
+var timeOutID;
+
+var inactiveTimeOutID;
+
+function t(callback, time, inactiveTime = 1000) {
+  gotInput = true;
+
+  if (!executing) inner();
+
+  function inner () {
+    executing = true;
+
+    timeOutID = setTimeout(() => {
+
+      callback();
+      executing = false;
+      
+      // if the function got called, while this timeout was active repeat repeat this function
+      if (gotInput) {
+        inner();
+        gotInput = false;
+      }
+    }, time);
+  }
+
+  // kill preivious inactiveTimeOut
+  clearTimeout(inactiveTimeOutID);
+  inactiveTimeOutID = setTimeout(() => {
+    // if there is no calling of this function (till this timeout resolves)
+    // it doesnt get killed and can resolve: it will kill the main-Timeout and call the callback imediately
+    clearTimeout(timeOutID);
+    callback();
+    executing = false;
+  }, inactiveTime);
+}
