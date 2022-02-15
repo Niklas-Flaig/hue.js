@@ -279,7 +279,7 @@ class Group {
     slider.addEventListener("input", () => {
       this.state.bri = slider.querySelector("input[type=range]").value;
       this.renderState();
-      this.sendState();
+      throttle(() => this.sendState());
     });
   }
 
