@@ -20,9 +20,21 @@ doHTML("GET", res => {
       const newScene = new Scene(scene[0], sceneRes);
       
       newScene.addToHtml("#scenes");
+
+      scenes.push(newScene);
+      
+      scenes.forEach(scene => {
+        scene.addEventListeners();
+      });
     }
 
   }, "scenes/" + scene[0]));
+  
+  scenes.forEach(scene => {
+    console.log(err);
+    console.log("HIaaaaa");
+    scene.addEventListeners();
+  });
 
 }, "scenes");
 

@@ -169,6 +169,13 @@ class Scene {
     this.getDomAdress().querySelector(".sceneGradient").setAttribute("style", `background-image: linear-gradient(90deg${gradient})`);
   }
 
+  addEventListeners() {
+    this.getDomAdress().addEventListener("click", () => {
+      console.log("HI");
+      this.activateScene();
+    });
+  }
+
   addToHtml(address) {
     const nameInWords = this.name.split(" ");
 
@@ -205,5 +212,10 @@ class Scene {
     `;
 
     this.renderState();
+  }
+  activateScene() {
+    doHTML("PUT", `{
+      "scene": "${this.sceneID}"
+    }`, `groups/0/action`);
   }
 }
