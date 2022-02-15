@@ -7,11 +7,12 @@ const icons = {
 };
 
 let groups = [];
+let scenes = [];
+let lights = [];
 
 
 doHTML("GET", res => {
   // in the res the lightstates arent represented
-  let scenes = [];
 
   // get the data for each individual scene
   Object.entries(res).forEach(scene => doHTML("GET", sceneRes => {
@@ -40,7 +41,6 @@ doHTML("GET", res => {
 }, "scenes");
 
 doHTML("GET", res => {
-  let lights = [];
 
   Object.entries(res).forEach(light => {
     const newLight = new Light(light);
