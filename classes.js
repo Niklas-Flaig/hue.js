@@ -223,3 +223,116 @@ class Scene {
     }`, `groups/0/action`);
   }
 }
+
+class Group {
+  constructor(group) {
+    this.groupID = group[0];
+    this.name = group[1].name;
+    this.lightIDs = group[1].lights;
+    this.icon = icons[group[1].class];
+    this.type = group[1].type;
+    this.state = {
+      on: group[1].action.on,
+      bri: group[1].action.bri,
+    };
+    console.log(this.state);
+  }
+  getGroupID() {}
+  getName() {}
+  getLightIDs() {}
+  getIcon() {}
+  getType() {}
+  getDomAdress() {
+    return document.querySelector(`#group${this.groupID}`);
+  }
+
+  addToHtml(address) {
+    document.querySelector(address).innerHTML += `
+      <div class="zone" id="group${this.groupID}">
+        <div class="top">
+
+          <span class="zoneName">${this.name}</span>
+
+          <label class="toggleSmall">
+            <input class="switcher" type="checkbox">
+          </label>
+
+        </div>
+        <div class="slider">
+          <div class="progress"></div>
+          <div class="sliderShadow"></div>
+          <input min="0" max="255" value="${this.state.bri}" type="range">
+        </div>
+
+      </div>
+    `;
+
+    this.renderState();
+  }
+  
+  addEventListeners() {
+    let checkBox = this.getDomAdress().querySelector(".switcher");
+
+    checkBox.addEventListener("click", () => {
+      this.state.on = checkBox.checked;
+      this.renderState();
+      this.sendState();
+    });
+
+    let slider = this.getDomAdress().querySelector(".slider");
+
+    slider.addEventListener("input", () => {
+      this.state.bri = slider.querySelector("input[type=range]").value;
+      this.renderState();
+      this.sendState();
+    });
+  }
+
+  renderState() {
+    /* render the color of the card */
+    let gradientColors = [];
+
+    // just pushes the possible colors
+    this.lightIDs.forEach(lightID => {
+      // get the light that is reffrered to in the group
+      const thisLight = lights.find(light => light.lightID === lightID);
+
+      gradientColors.push(colorMath.RGBmaxSaturation(colorMath.HSVtoRGB(thisLight.state, true)));
+    });
+
+    gradientColors = colorMath.sortRGBvalues(gradientColors);
+
+    let gradient = "";
+    
+    for (let a = 0; a < gradientColors.length; a++) {
+      const color = gradientColors[a];
+      gradient += `,rgb(${color.r},${color.g},${color.b}) ${a * (100 / (gradientColors.length - 1))}%`;
+    }
+
+    // set the gradient
+    this.getDomAdress().setAttribute("style", `background-image: linear-gradient(90deg${gradient})`);
+
+
+
+    /* render the slider */
+    const slider = this.getDomAdress().querySelector(".slider");
+    const range = slider.querySelector("input[type=range]");
+    const prog = slider.querySelector(".progress");
+
+    const width = Math.max(slider.offsetWidth / range.max * range.value, 10);
+
+    prog.style.width = `${width}px`;
+    prog.style["margin-right"] = `${0-width}px`;
+
+    console.log("as");
+  }
+
+  sendState() {
+    doHTML("PUT", `{
+      "on": ${this.state.on},
+      "bri": ${this.state.bri},
+      "transitiontime": 5
+    }`, `groups/${this.groupID}/action`);
+  }
+
+}
