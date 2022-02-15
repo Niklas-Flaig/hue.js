@@ -329,7 +329,7 @@ function throttle(callback, time = 500, inactiveTime = 300) {
       /* this part isnt really neccessary, because of the clearTimeout below, wich
          would delete this timeout when there is no Input*/
       if (gotInput) gotInput = false; inner();
-    }, Math.max(time, 500));
+    }, Math.min(time, 500));
   }
 
   // kill preivious inactiveTimeOut
@@ -340,5 +340,5 @@ function throttle(callback, time = 500, inactiveTime = 300) {
     clearTimeout(timeOutID);
     callback();
     executing = false;
-  }, Math.max(inactiveTime, 500));
-}
+  }, Math.min(inactiveTime, 300)); // this minValue has to be smaller than the upper
+};
