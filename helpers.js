@@ -169,6 +169,11 @@ const colorMath = {
   
     if (geometry.points.match(cPoint, wPoint)) { // when the color is white
       // its a greyTone
+      color.r = 1;
+      color.g = 1;
+      color.b = 1;
+      saturation = 1;
+      
     } else {
       // get the crossing point of the white-color line and the traiingle sides
       let brPoint = geometry.lines.crossingPoint([bPoint, rPoint], [cPoint, wPoint]);
@@ -179,7 +184,6 @@ const colorMath = {
       // 2. checks if the crossingPoint of a line with is inside the line from blue to red (if not, then the colour isnt in this Part of the triangle)
       // 3. if the cPoint is either between the wPoint and the brPoint (inside the triangle) or outside of the triangle, but more near to the brPoint
       if (!isNaN(brPoint.x + brPoint.y) && geometry.points.inBetweenAB(brPoint, bPoint, rPoint) && (geometry.points.inBetweenAB(cPoint, wPoint, brPoint) || geometry.points.afterAB(cPoint, wPoint, brPoint))) {
-        console.log("1");
         if (geometry.points.inBetweenAB(brPoint, geometry.points.middlePoint(bPoint, rPoint), rPoint)) {
           // the crossing point sits on the more-red half of the blueRed line
           color.r = 1;
@@ -205,7 +209,6 @@ const colorMath = {
         saturation = geometry.points.procentualDistance(cPoint, brPoint, wPoint);
 
       } else if (!isNaN(rgPoint.x + rgPoint.y) && geometry.points.inBetweenAB(rgPoint, rPoint, gPoint) && (geometry.points.inBetweenAB(cPoint, wPoint, rgPoint) || geometry.points.afterAB(cPoint, wPoint, rgPoint))) {
-        console.log("2");
         if (geometry.points.inBetweenAB(rgPoint, geometry.points.middlePoint(rPoint, gPoint), gPoint)) {
           // the crossing point sits on the more-green half of the redGreen line
           color.r = geometry.points.procentualDistance(rgPoint, gPoint, geometry.points.middlePoint(rPoint, gPoint));
@@ -258,13 +261,13 @@ const colorMath = {
         console.log("AnotherColorError?");
       }
 
-      // apply saturation and brigthness to the color
-      color.r = map(saturation, 0, 1, color.r, 1) * bri;
-      color.g = map(saturation, 0, 1, color.g, 1) * bri;
-      color.b = map(saturation, 0, 1, color.b, 1) * bri;
-
-      return color;
     }
+    // apply saturation and brigthness to the color
+    color.r = map(saturation, 0, 1, color.r, 1) * bri;
+    color.g = map(saturation, 0, 1, color.g, 1) * bri;
+    color.b = map(saturation, 0, 1, color.b, 1) * bri;
+
+    return color;
   },
   sortRGBvalues: (colors) => {
     // sorts the rgb values to create smoother gradients
