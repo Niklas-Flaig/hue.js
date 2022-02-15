@@ -16,7 +16,6 @@ doHTML("GET", res => {
 
   // get the data for each individual scene
   Object.entries(res).forEach(scene => doHTML("GET", sceneRes => {
-    console.log(sceneRes);
     
     if (sceneRes.type === "GroupScene") {
       const newScene = new Scene(scene[0], sceneRes);
@@ -33,7 +32,6 @@ doHTML("GET", res => {
   }, "scenes/" + scene[0]));
   
   scenes.forEach(scene => {
-    console.log(err);
     console.log("HIaaaaa");
     scene.addEventListeners();
   });

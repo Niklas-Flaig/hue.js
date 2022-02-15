@@ -156,7 +156,7 @@ class Scene {
     });
 
     gradientColors = colorMath.sortRGBvalues(gradientColors);
-    console.log(gradientColors);
+    // console.log(gradientColors);
 
     let gradient = "";
 
@@ -171,7 +171,6 @@ class Scene {
 
   addEventListeners() {
     this.getDomAdress().addEventListener("click", () => {
-      console.log("HI");
       this.activateScene();
     });
   }
@@ -319,8 +318,6 @@ class Group {
 
     prog.style.width = `${width}px`;
     prog.style["margin-right"] = `${0-width}px`;
-
-    console.log("as");
   }
 
   sendState() {
