@@ -87,9 +87,9 @@ class Light {
     this.getDomAdress().setAttribute("style", `background: rgb(${color.r},${color.g},${color.b})`);
     
     
-    let primeColor = "#FFFFFF";
+    let primeColor = "var(--white)";
     if (this.state.bri > 127 && this.state.on) {
-      primeColor = "#181818";
+      primeColor = "var(--black)";
     }
     this.getDomAdress().querySelector(".icon").setAttribute("style", `fill: ${primeColor}`);
     this.getDomAdress().querySelectorAll("span").forEach(span => span.setAttribute("style", `color: ${primeColor}`));
