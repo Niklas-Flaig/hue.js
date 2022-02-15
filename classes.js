@@ -81,19 +81,23 @@ class Light {
 
   renderState() {
     // get the color
-    let color;
-    if (this.state.on) {
-      // check if the lights on or of
-      color = colorMath.HSVtoRGB(this.state);
-    } else {
-      color = {
-        r: 39,
-        g: 39,
-        b: 39,
-      };
-    }
-    
+    let color = {
+      r: 39,
+      g: 39,
+      b: 39,
+    };
+    if (this.state.on) color = colorMath.HSVtoRGB(this.state);
+
     this.getDomAdress().setAttribute("style", `background: rgb(${color.r},${color.g},${color.b})`);
+    
+    
+    let primeColor = "#FFFFFF";
+    if (this.state.bri > 127 && this.state.on) {
+      primeColor = "#181818";
+    }
+    this.getDomAdress().querySelector(".icon").setAttribute("style", `fill: ${primeColor}`);
+    this.getDomAdress().querySelectorAll("span").forEach(span => span.setAttribute("style", `color: ${primeColor}`));
+    
   }
 
 
