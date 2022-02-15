@@ -16,8 +16,28 @@ class Light {
     let checkBoxState = "";
     if (this.state.on) checkBoxState = "checked=''";
 
+    const nameInWords = this.name.split(" ");
+
+    let overflowed = false;
+    
+    nameInWords.forEach(word => {
+      // not really the good way to use 14 here, because e.g. "i" is way smaller than "m"
+      if (word.length > 14) overflowed = true;
+    });
+
     let nameSpans = "";
-    this.name.split(" ").forEach(word => nameSpans += `<span>${word}</span>`);
+    
+    if (!overflowed) {
+      nameInWords.forEach(word => nameSpans += `<span class="word">${word}</span>`);
+    } else {
+      this.name.split("").forEach(letter => {
+        if (letter === " ") {
+          nameSpans += `<span>&nbsp</span>`;
+        } else {
+          nameSpans += `<span>${letter}</span>`;
+        }
+      });
+    }
 
     document.querySelector(address).innerHTML += `
       <div class="light" id="light${this.getlightID()}">
@@ -150,8 +170,28 @@ class Scene {
   }
 
   addToHtml(address) {
+    const nameInWords = this.name.split(" ");
+
+    let overflowed = false;
+    
+    nameInWords.forEach(word => {
+      // not really the good way to use 14 here, because e.g. "i" is way smaller than "m"
+      if (word.length > 14) overflowed = true;
+    });
+
     let nameSpans = "";
-    this.name.split(" ").forEach(word => nameSpans += `<span>${word}</span>`);
+    
+    if (!overflowed) {
+      nameInWords.forEach(word => nameSpans += `<span class="word">${word}</span>`);
+    } else {
+      this.name.split("").forEach(letter => {
+        if (letter === " ") {
+          nameSpans += `<span>&nbsp</span>`;
+        } else {
+          nameSpans += `<span>${letter}</span>`;
+        }
+      });
+    }
 
     document.querySelector(address).innerHTML += `
       <div class="scene" id="scene${this.getSceneID()}">
