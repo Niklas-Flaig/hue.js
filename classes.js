@@ -13,9 +13,6 @@ class Light {
   getlightID() {return this.lightID;}
   getIcon() {return this.icon;}
   addToHtml(address) {
-    let checkBoxState = "";
-    if (this.state.on) checkBoxState = "checked=''";
-
     const nameInWords = this.name.split(" ");
 
     let overflowed = false;
@@ -55,7 +52,7 @@ class Light {
           </div>
           <div class="bottom">
             <label class="toggle">
-              <input class="switcher" type="checkbox" ${checkBoxState}>
+              <input class="switcher" type="checkbox">
             </label>
           </div>
         </div>
@@ -81,7 +78,7 @@ class Light {
   }
 
   renderState() {
-    // get the color
+    /* render the color */
     let color = {
       r: 39,
       g: 39,
@@ -99,6 +96,9 @@ class Light {
     this.getDomAdress().querySelector(".icon").setAttribute("style", `fill: ${primeColor}`);
     this.getDomAdress().querySelectorAll("span").forEach(span => span.setAttribute("style", `color: ${primeColor}`));
     
+    /* render the toggle*/
+    const checkBox = this.getDomAdress().querySelector(".switcher");
+    checkBox.checked = this.state.on;
   }
 
 
@@ -282,7 +282,7 @@ class Group {
   }
   
   addEventListeners() {
-    let checkBox = this.getDomAdress().querySelector(".switcher");
+    const checkBox = this.getDomAdress().querySelector(".switcher");
 
     checkBox.addEventListener("click", () => {
       this.state.on = checkBox.checked;
@@ -290,7 +290,7 @@ class Group {
       this.sendState();
     });
 
-    let slider = this.getDomAdress().querySelector(".slider");
+    const slider = this.getDomAdress().querySelector(".slider");
 
     slider.addEventListener("input", () => {
       this.state.bri = slider.querySelector("input[type=range]").value;
@@ -323,6 +323,11 @@ class Group {
     // set the gradient
     this.getDomAdress().setAttribute("style", `background-image: linear-gradient(90deg${gradient})`);
 
+
+    /* render the toggle */
+    /* render the toggle*/
+    const checkBox = this.getDomAdress().querySelector(".switcher");
+    checkBox.checked = this.state.on;
 
 
     /* render the slider */
