@@ -3,7 +3,7 @@
   --black2: #272727;
   --white: #FFFFFF;
   --transparentBlack: #18181847;
-  --sliderLeftWhite: linear-gradient(90deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.8) 100%);
+  --sliderLeftWhite: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.6) 100%);
 
 
 
@@ -259,31 +259,39 @@ h1 {
     height: 88px;
     margin: 0px 8px 16px 8px;
 
-    padding: 16px 20px;
-
     border-radius: var(--corners);
     background: var(--gradientGroup), #8DD3B5;
     box-shadow: var(--shadowCard);
 
-    display: flex;
+    .blurEffect {
+      box-sizing: border-box;
+      width: 320px;
+      height: 88px;
+      backdrop-filter: blur(8px);
+      border-radius: var(--corners);
+
+      display: flex;
       flex-direction: column;
       justify-content: space-between;
 
-    .top {
-      box-sizing: border-box;
+      padding: 16px 20px;
 
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: flex-start;
-
-      .zoneName {
-        font-family: Arial;
-        font-style: normal;
-        font-weight: bold;
-        font-size: var(--defaultFont);
-        line-height: 22.5px;
-        color: var(--white);
+      .top {
+        box-sizing: border-box;
+  
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+  
+        .zoneName {
+          font-family: Arial;
+          font-style: normal;
+          font-weight: bold;
+          font-size: var(--defaultFont);
+          line-height: 22.5px;
+          color: var(--white);
+        }
       }
     }
   }

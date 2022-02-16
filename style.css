@@ -3,7 +3,7 @@
   --black2: #272727;
   --white: #FFFFFF;
   --transparentBlack: #18181847;
-  --sliderLeftWhite: linear-gradient(90deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.8) 100%);
+  --sliderLeftWhite: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.6) 100%);
   --shadowInsetAlt: 0px 1px 3px 0px #0000001A inset, 0px 2px 1px 0px #0000000F inset, 0px 1px 1px 0px #00000012 inset;
   --shadowInset: 0px 1px 3px 0px #00000033 inset, 0px 2px 1px 0px #0000001F inset, 0px 1px 1px 0px #00000024 inset;
   --shadowCard: 0px 1px 3px 0px #00000033, 0px 2px 1px 0px #0000001F, 0px 1px 1px 0px #00000024;
@@ -297,11 +297,20 @@ h1 {
   width: 320px;
   height: 88px;
   margin: 0px 8px 16px 8px;
-  padding: 16px 20px;
   border-radius: var(--corners);
   background: var(--gradientGroup), #8DD3B5;
   -webkit-box-shadow: var(--shadowCard);
           box-shadow: var(--shadowCard);
+}
+
+#zones .zone .blurEffect {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 320px;
+  height: 88px;
+  -webkit-backdrop-filter: blur(8px);
+          backdrop-filter: blur(8px);
+  border-radius: var(--corners);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -312,9 +321,10 @@ h1 {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  padding: 16px 20px;
 }
 
-#zones .zone .top {
+#zones .zone .blurEffect .top {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   display: -webkit-box;
@@ -332,7 +342,7 @@ h1 {
           align-items: flex-start;
 }
 
-#zones .zone .top .zoneName {
+#zones .zone .blurEffect .top .zoneName {
   font-family: Arial;
   font-style: normal;
   font-weight: bold;
