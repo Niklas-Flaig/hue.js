@@ -321,9 +321,6 @@ class Group {
       gradient += `,rgb(${color.r},${color.g},${color.b}) ${a * (100 / (gradientColors.length - 1))}%`;
     }
 
-    // let darkness = `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.24) ${map(this.state.bri, 1, 254, 20, 80)}%, rgba(0, 0, 0, 0.4) 100%),`;
-    // let darkness = `linear-gradient(180deg, rgba(0, 0, 0, 0) ${map(this.state.bri, 1, 254, 0, 0)}%, rgba(0, 0, 0, ${map(this.state.bri, 1, 254, 0.70, 0.33)}) ${map(this.state.bri, 1, 254, 12, 88.5)}%),`;
-    // let darkness = `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.0781348) 34.21%, rgba(0, 0, 0, 0.200968) 58.94%, rgba(0, 0, 0, 0.44) 100%),`;
     let darkness = `linear-gradient(180deg,
       rgba(0, 0, 0, 0) 0%,
       rgba(0, 0, 0, ${map(this.state.bri, 1, 254, 0.13, 0)}) 3.67%,
