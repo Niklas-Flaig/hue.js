@@ -241,7 +241,7 @@ class Group {
       on: group[1].action.on,
       bri: group[1].action.bri,
     };
-    console.log(this.state);
+    // console.log(this.state);
   }
   getGroupID() {}
   getName() {}
@@ -257,21 +257,22 @@ class Group {
 
     groupDiv.innerHTML += `
       <div class="zone" id="group${this.groupID}">
-        <div class="top">
-
+        <div class="blurEffect">
+          <div class="top">
+          
           <span class="zoneName">${this.name}</span>
-
+          
           <label class="toggleSmall">
             <input class="switcher" type="checkbox">
           </label>
-
+          
+          </div>
+          <div class="slider">
+            <div class="progress"></div>
+            <div class="sliderShadow"></div>
+            <input min="1" max="254" value="${this.state.bri}" type="range">
+          </div>
         </div>
-        <div class="slider">
-          <div class="progress"></div>
-          <div class="sliderShadow"></div>
-          <input min="0" max="255" value="${this.state.bri}" type="range">
-        </div>
-
       </div>
     `;
 
