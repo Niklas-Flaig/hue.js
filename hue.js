@@ -23,17 +23,10 @@ doHTML("GET", res => {
       newScene.addToHtml("#scenes");
 
       scenes.push(newScene);
-      
-      scenes.forEach(scene => {
-        scene.addEventListeners();
-      });
     }
 
   }, "scenes/" + scene[0]));
   
-  scenes.forEach(scene => {
-    scene.addEventListeners();
-  });
 
 }, "scenes");
 

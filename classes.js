@@ -199,7 +199,10 @@ class Scene {
       });
     }
 
-    document.querySelector(address).innerHTML += `
+
+    let sceneDiv = document.createElement("div");
+    
+    sceneDiv.innerHTML = `
       <div class="scene" id="scene${this.getSceneID()}">
         <div class="sceneName">
           ${nameSpans}
@@ -208,9 +211,12 @@ class Scene {
           <div class="blurEffect"></div>
         </div>
       </div>
-    `;
+      `;
+      
+      document.querySelector(address).appendChild(sceneDiv.childNodes[1]);
 
-    this.renderState();
+      this.addEventListeners();
+      this.renderState();
   }
   activateScene() {
     doHTML("PUT", `{
