@@ -333,11 +333,13 @@ class Group {
       rgba(0, 0, 0, ${map(this.state.bri, 1, 254, 0.61, 0.16)}) 50%,
       rgba(0, 0, 0, ${map(this.state.bri, 1, 254, 0.66, 0.24)}) 66.67%,
       rgba(0, 0, 0, ${map(this.state.bri, 1, 254, 0.70, 0.45)}) 100%
-      )`;
+    )`;
 
 
     // set the gradient
-    this.getDomAdress().setAttribute("style", `background-image: ${darkness}, linear-gradient(90deg${gradient})`);
+    this.getDomAdress().setAttribute("style", `background-image: linear-gradient(90deg${gradient})`);
+    // the dark part has to be above the blur
+    this.getDomAdress().querySelector(".blurEffect").setAttribute("style", `background-image: ${darkness}`);
 
 
     /* render the toggle */
