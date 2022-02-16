@@ -39,10 +39,6 @@ doHTML("GET", res => {
 
     lights.push(newLight);
   });
-
-  lights.forEach(light => {
-    light.addEventListeners();
-  });
   
 }, "lights");
 
@@ -60,10 +56,6 @@ doHTML("GET", res => { // needs to be executed after lights, because they are re
 
     groups.push(newGroup);
     
-  });
-
-  groups.forEach(scene => {
-    scene.addEventListeners();
   });
 
 }, "groups");

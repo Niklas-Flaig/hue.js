@@ -39,7 +39,10 @@ class Light {
       });
     }
 
-    document.querySelector(address).innerHTML += `
+
+    let lightDiv = document.createElement("div");
+
+    lightDiv.innerHTML += `
       <div class="light" id="light${this.getlightID()}">
         <div class="gradient">
           <div class="top">
@@ -59,7 +62,9 @@ class Light {
       </div>
     `;
 
-    // add the color
+    document.querySelector(address).appendChild(lightDiv.childNodes[1]);
+
+    this.addEventListeners();
     this.renderState();
   }
   addEventListeners() {
@@ -248,7 +253,9 @@ class Group {
   }
 
   addToHtml(address) {
-    document.querySelector(address).innerHTML += `
+    let groupDiv = document.createElement("div");
+
+    groupDiv.innerHTML += `
       <div class="zone" id="group${this.groupID}">
         <div class="top">
 
@@ -268,6 +275,9 @@ class Group {
       </div>
     `;
 
+    document.querySelector(address).appendChild(groupDiv.childNodes[1]);
+
+    this.addEventListeners();
     this.renderState();
   }
   
