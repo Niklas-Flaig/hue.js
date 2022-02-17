@@ -1,5 +1,5 @@
 class Light {
-  constructor(light, appendTo) {
+  constructor(light) {
     this.lightID = light[0];
     this.icon = icons[light[1].config.archetype];
     this.name = light[1].name;
@@ -118,6 +118,25 @@ class Light {
     /* render the toggle*/
     const checkBox = this.getDomAdress().querySelector(".switcher");
     checkBox.checked = this.state.on;
+  }
+
+  getColor(reqType) {
+    switch (this.lightMode) {
+      
+      case "xy":
+        switch (reqType) {
+          case "rgb":
+            return colorMath.XYtoRGB(this.state);
+        }
+        break;
+
+      default: // hue
+        switch (reqType) {
+          case "rgb":
+            return colorMath.HSVtoRGB(this.state);
+        }
+        break;
+    }
   }
 
 
@@ -247,6 +266,8 @@ class Scene {
       allLights.find(lightInAll => lightInAll.getlightID() === lightInScene.lightID).setState(lightInScene.lightMode, lightInScene.state);
     });
 
+    allGroups.forEach(group => group.renderState());
+
     doHTML("PUT", `{
       "scene": "${this.sceneID}"
     }`, `groups/0/action`);
@@ -332,7 +353,7 @@ class Group {
       // get the light that is reffrered to in the group
       const thisLight = allLights.find(light => light.lightID === lightID);
 
-      gradientColors.push(colorMath.RGBmaxSaturation(colorMath.HSVtoRGB(thisLight.state, true)));
+      gradientColors.push(colorMath.RGBmaxSaturation(thisLight.getColor("rgb")));
     });
 
     gradientColors = colorMath.sortRGBvalues(gradientColors);
