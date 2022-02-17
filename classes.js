@@ -122,7 +122,7 @@ class Light {
 
   getColor(reqType) {
     switch (this.lightMode) {
-      
+
       case "xy":
         switch (reqType) {
           case "rgb":
@@ -141,12 +141,22 @@ class Light {
 
 
   sendState() {
-    doHTML("PUT", `{
-      "on": ${this.state.on},
-      "bri": ${this.state.bri},
-      "sat": ${this.state.sat},
-      "hue": ${this.state.hue}
-    }`, `lights/${this.lightID}/state/`);
+    let res;
+    if (this.lightMode === "xy") {
+      res = `{
+        "on": ${this.state.on},
+        "xy": [${this.state.x}, ${this.state.y}],
+        "bri": ${this.state.bri}
+      }`;
+    } else {
+      res = `{
+        "on": ${this.state.on},
+        "bri": ${this.state.bri},
+        "sat": ${this.state.sat},
+        "hue": ${this.state.hue}
+      }`;
+    }
+    doHTML("PUT", res, `lights/${this.lightID}/state/`);
   }
 
 }
