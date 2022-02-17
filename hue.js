@@ -8,7 +8,7 @@ const icons = {
 
 let groups = [];
 let scenes = [];
-let lights = [];
+let allLights = [];
 
 
 doHTML("GET", res => {
@@ -37,7 +37,7 @@ doHTML("GET", res => {
 
     newLight.addToHtml("#lights");
 
-    lights.push(newLight);
+    allLights.push(newLight);
   });
   
 }, "lights");
@@ -47,8 +47,6 @@ doHTML("GET", res => { // needs to be executed after lights, because they are re
 
   // get the data for each individual scene
   Object.entries(res).forEach(group => {
-    
-    console.log(group);
 
     const newGroup = new Group(group);
     

@@ -9,6 +9,7 @@ class Light {
       hue: light[1].state.hue,
       sat: light[1].state.sat,
     };
+    this.lightMode = "";
   }
   getlightID() {return this.lightID;}
   getIcon() {return this.icon;}
@@ -76,6 +77,12 @@ class Light {
   getDomAdress() {
     return document.querySelector(`#light${this.getlightID()}`);
   }
+  setState(newMode, newState) {
+    // newState is an object;
+    this.lightMode = newMode;
+    this.state = newState;
+    this.renderState();
+  }
 
   renderState() {
     /* render the color */
@@ -84,7 +91,18 @@ class Light {
       g: 39,
       b: 39,
     };
-    if (this.state.on) color = colorMath.HSVtoRGB(this.state);
+    if (this.state.on) {
+      if (this.lightMode === "xy") {
+        console.log(this.state);
+        color = colorMath.XYtoRGB(this.state);
+      } else if (this.lightMode === "ct") {
+        //TODO
+
+      } else {
+        color = colorMath.HSVtoRGB(this.state);
+
+      }
+    }
 
     this.getDomAdress().setAttribute("style", `background: rgb(${color.r},${color.g},${color.b})`);
     
@@ -93,6 +111,7 @@ class Light {
     if (this.state.bri > 127 && this.state.on) {
       primeColor = "var(--black)";
     }
+
     this.getDomAdress().querySelector(".icon").setAttribute("style", `fill: ${primeColor}`);
     this.getDomAdress().querySelectorAll("span").forEach(span => span.setAttribute("style", `color: ${primeColor}`));
     
@@ -224,6 +243,10 @@ class Scene {
       this.renderState();
   }
   activateScene() {
+    this.lights.forEach(lightInScene => {
+      allLights.find(lightInAll => lightInAll.getlightID() === lightInScene.lightID).setState(lightInScene.lightMode, lightInScene.state);
+    });
+
     doHTML("PUT", `{
       "scene": "${this.sceneID}"
     }`, `groups/0/action`);
@@ -307,7 +330,7 @@ class Group {
     // just pushes the possible colors
     this.lightIDs.forEach(lightID => {
       // get the light that is reffrered to in the group
-      const thisLight = lights.find(light => light.lightID === lightID);
+      const thisLight = allLights.find(light => light.lightID === lightID);
 
       gradientColors.push(colorMath.RGBmaxSaturation(colorMath.HSVtoRGB(thisLight.state, true)));
     });
