@@ -33,19 +33,6 @@
       </div>
     </div>
     <script>
-      document.querySelectorAll(".slider").forEach(slider => {
-        const range = slider.querySelector("input[type=range]");
-        range.addEventListener("input", () => {
-
-          const prog = slider.querySelector(".progress");
-
-          const width = Math.max(slider.offsetWidth / 100 * range.value, 10);
-
-          prog.style.width = `${width}px`;
-          prog.style["margin-right"] = `${0-width}px`;
-        });
-      });
-
     </script>
     <script src="env.js"></script>
     <script src="helpers.js"></script>
