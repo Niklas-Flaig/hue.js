@@ -8,8 +8,10 @@ class Light {
       bri: light[1].state.bri,
       hue: light[1].state.hue,
       sat: light[1].state.sat,
+      x: light[1].state.xy[0],
+      y: light[1].state.xy[1],
     };
-    this.lightMode = "";
+    this.lightMode = "xy";
   }
   getlightID() {return this.lightID;}
   getIcon() {return this.icon;}
@@ -93,18 +95,16 @@ class Light {
     };
     if (this.state.on) {
       if (this.lightMode === "xy") {
-        console.log(this.state);
         color = colorMath.XYtoRGB(this.state);
       } else if (this.lightMode === "ct") {
         //TODO
-
       } else {
-        color = colorMath.HSVtoRGB(this.state);
-
+        color = colorMath.RGBmaxSaturation(colorMath.HSVtoRGB(this.state));
       }
     }
+    let darkness = colorMath.darknessGradient(this.state.bri);
 
-    this.getDomAdress().setAttribute("style", `background: rgb(${color.r},${color.g},${color.b})`);
+    this.getDomAdress().setAttribute("style", `background: ${darkness}, rgb(${color.r},${color.g},${color.b})`);
     
     
     let primeColor = "var(--white)";
@@ -276,7 +276,9 @@ class Scene {
       allLights.find(lightInAll => lightInAll.getlightID() === lightInScene.lightID).setState(lightInScene.lightMode, lightInScene.state);
     });
 
-    allGroups.forEach(group => group.renderState());
+    // renders the state from the lights
+    rooms.forEach(group => group.renderState());
+    zones.forEach(group => group.renderState());
 
     doHTML("PUT", `{
       "scene": "${this.sceneID}"
@@ -342,6 +344,10 @@ class Group {
     checkBox.addEventListener("click", () => {
       this.state.on = checkBox.checked;
       this.renderState();
+      this.lightIDs.forEach(lightIDInThisGroup => {
+        allLights.find(light => light.getlightID === lightIDInThisGroup).setState("xy", );
+      });
+
       this.sendState();
     });
 
