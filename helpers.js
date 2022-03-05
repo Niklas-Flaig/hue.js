@@ -75,6 +75,19 @@ function map(value, minStart, maxStart, minGoal, maxGoal) {
 }
 
 const colorMath = {
+  darknessGradient: (brightness) => {
+    if (brightness === undefined) brightness = 1;
+    return `linear-gradient(180deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, ${map(brightness, 1, 254, 0.13, 0)}) 3.67%,
+      rgba(0, 0, 0, ${map(brightness, 1, 254, 0.28, 0)}) 11.11%,
+      rgba(0, 0, 0, ${map(brightness, 1, 254, 0.42, 0.04)}) 22.22%,
+      rgba(0, 0, 0, ${map(brightness, 1, 254, 0.52, 0.08)}) 33.33%,
+      rgba(0, 0, 0, ${map(brightness, 1, 254, 0.61, 0.16)}) 50%,
+      rgba(0, 0, 0, ${map(brightness, 1, 254, 0.66, 0.24)}) 66.67%,
+      rgba(0, 0, 0, ${map(brightness, 1, 254, 0.70, 0.45)}) 100%
+    )`;
+  },
   RGBmaxSaturation: (val) => {
     let maxVal = Math.max(val.r, val.g, val.b);
 

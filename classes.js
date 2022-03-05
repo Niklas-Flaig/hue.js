@@ -375,17 +375,7 @@ class Group {
       gradient += `,rgb(${color.r},${color.g},${color.b}) ${a * (100 / (gradientColors.length - 1))}%`;
     }
 
-    let darkness = `linear-gradient(180deg,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, ${map(this.state.bri, 1, 254, 0.13, 0)}) 3.67%,
-      rgba(0, 0, 0, ${map(this.state.bri, 1, 254, 0.28, 0)}) 11.11%,
-      rgba(0, 0, 0, ${map(this.state.bri, 1, 254, 0.42, 0.04)}) 22.22%,
-      rgba(0, 0, 0, ${map(this.state.bri, 1, 254, 0.52, 0.08)}) 33.33%,
-      rgba(0, 0, 0, ${map(this.state.bri, 1, 254, 0.61, 0.16)}) 50%,
-      rgba(0, 0, 0, ${map(this.state.bri, 1, 254, 0.66, 0.24)}) 66.67%,
-      rgba(0, 0, 0, ${map(this.state.bri, 1, 254, 0.70, 0.45)}) 100%
-    )`;
-
+    let darkness = colorMath.darknessGradient(this.state.bri);
 
     // set the gradient
     this.getDomAdress().setAttribute("style", `background-image: linear-gradient(90deg${gradient})`);
