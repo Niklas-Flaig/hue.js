@@ -277,7 +277,7 @@ h1 {
           backdrop-filter: blur(8px);
 }
 
-#zones {
+#zones, #rooms {
   margin: 4px 0 24px 48px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -291,7 +291,7 @@ h1 {
   width: fit-content;
 }
 
-#zones .zone {
+#zones .zone, #rooms .zone {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   width: 320px;
@@ -303,7 +303,7 @@ h1 {
           box-shadow: var(--shadowCard);
 }
 
-#zones .zone .blurEffect {
+#zones .zone .blurEffect, #rooms .zone .blurEffect {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   width: 320px;
@@ -324,7 +324,7 @@ h1 {
   padding: 16px 20px;
 }
 
-#zones .zone .blurEffect .top {
+#zones .zone .blurEffect .top, #rooms .zone .blurEffect .top {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   display: -webkit-box;
@@ -342,7 +342,7 @@ h1 {
           align-items: flex-start;
 }
 
-#zones .zone .blurEffect .top .zoneName {
+#zones .zone .blurEffect .top .zoneName, #rooms .zone .blurEffect .top .zoneName {
   font-family: Arial;
   font-style: normal;
   font-weight: bold;
