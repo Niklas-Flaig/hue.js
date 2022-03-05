@@ -369,22 +369,36 @@ class Group {
       // get the light that is reffrered to in the group
       const thisLight = allLights.find(light => light.lightID === lightID);
 
-      gradientColors.push(colorMath.RGBmaxSaturation(thisLight.getColor("rgb")));
+      if (thisLight.state.bri > 1) gradientColors.push(colorMath.RGBmaxSaturation(thisLight.getColor("rgb")));
     });
 
-    gradientColors = colorMath.sortRGBvalues(gradientColors);
-
-    let gradient = "";
+    console.log(gradientColors);
+    let gradient = "rgb(39,39,39) 50%";
     
-    for (let a = 0; a < gradientColors.length; a++) {
-      const color = gradientColors[a];
-      gradient += `,rgb(${color.r},${color.g},${color.b}) ${a * (100 / (gradientColors.length - 1))}%`;
+    if (gradientColors.length > 0) {
+      gradientColors = colorMath.sortRGBvalues(gradientColors);
+
+      gradient = "";
+      
+      for (let a = 0; a < gradientColors.length; a++) {
+        const color = gradientColors[a];
+
+        let perc = 50;
+        if (gradientColors.length > 1) perc = a * (100 / (gradientColors.length - 1));
+
+        gradient += `rgb(${color.r},${color.g},${color.b}) ${ perc }%`;
+
+        if (a + 1 < gradientColors.length) gradient += ",";
+      }
     }
 
-    let darkness = colorMath.darknessGradient(this.state.bri);
-
+    const darkness = colorMath.darknessGradient(this.state.bri);
+    
+    let gradientAttribute = `background: ${gradient}`;
+    if (gradientColors.length > 1) gradientAttribute = `background-image: linear-gradient(90deg,${gradient})`;
+    
     // set the gradient
-    this.getDomAdress().setAttribute("style", `background-image: linear-gradient(90deg${gradient})`);
+    this.getDomAdress().setAttribute("style", `${gradientAttribute}`);
     // the dark part has to be above the blur
     this.getDomAdress().querySelector(".blurEffect").setAttribute("style", `background-image: ${darkness}`);
 
