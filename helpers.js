@@ -175,10 +175,10 @@ const colorMath = {
     return {hue: hue, sat: sat, bri: bri};
   },
   XYtoRGB: (cPoint, bri = 255) => {
-    const rPoint = {x: 0.6915, y: 0.3038};
-    const gPoint = {x: 0.17, y: 0.7};
-    const bPoint = {x: 0.1532, y: 0.0475};
-    const wPoint = {x: 0.3127, y: 0.329};
+    const rPoint = {x: 0.6915, y: 0.3083};
+    const gPoint = {x: 0.2581, y: 0.6338};
+    const bPoint = {x: 0.1534, y: 0.0544};
+    const wPoint = {x: 0.3129, y: 0.3291};
   
     let color = {
       r: 0,
