@@ -417,8 +417,18 @@ class Group {
         });
       });
 
-      zones.forEach(zone => {zone.checkState(); zone.renderState();});
-      rooms.forEach(room => {room.checkState(); room.renderState();});
+      zones.forEach(zone => {
+        if (zone.getGroupID() !== this.groupID) { // dont have to render this Scene too
+          zone.checkState();
+          zone.renderState();
+        }
+      });
+      rooms.forEach(room => {
+        if (room.getGroupID() !== this.groupID) {
+          room.checkState();
+          room.renderState();
+        }
+      });
       throttle(() => this.sendState());
     });
   }
