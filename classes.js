@@ -431,6 +431,12 @@ class Group {
 
     const width = Math.max(slider.offsetWidth / range.max * range.value, 10);
 
+    if (!this.state.on) {
+      range.value = 1;
+    } else {
+      range.value = this.state.bri;
+    }
+
     prog.style.width = `${width}px`;
     prog.style["margin-right"] = `${0-width}px`;
   }
