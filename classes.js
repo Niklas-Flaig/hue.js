@@ -83,7 +83,7 @@ class Light {
       zones.forEach(zone => {
         zone.checkState();
         zone.renderState();
-      }); 
+      });
     });
   }
   getDomAdress() {
@@ -118,7 +118,7 @@ class Light {
         color = colorMath.RGBmaxSaturation(colorMath.HSVtoRGB(this.state));
       }
       darkness = colorMath.darknessGradient(this.state.bri);
-    } 
+    }
 
     this.getDomAdress().setAttribute("style", `background: ${darkness}, rgb(${color.r},${color.g},${color.b})`);
     
@@ -396,11 +396,23 @@ class Group {
 
     checkBox.addEventListener("click", () => {
       this.state.on = checkBox.checked;
-      this.renderState();
       this.lightIDs.forEach(lightIDInThisGroup => {
         allLights.find(light => light.getlightID() === lightIDInThisGroup).setState({
           on: this.state.on,
         });
+      });
+
+      zones.forEach(zone => {
+        if (zone.getGroupID() !== this.groupID) { // dont have to render this Scene too
+          zone.checkState();
+          zone.renderState();
+        }
+      });
+      rooms.forEach(room => {
+        if (room.getGroupID() !== this.groupID) {
+          room.checkState();
+          room.renderState();
+        }
       });
 
       this.sendState();
@@ -429,6 +441,7 @@ class Group {
           room.renderState();
         }
       });
+
       throttle(() => this.sendState());
     });
   }
