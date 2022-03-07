@@ -105,6 +105,9 @@ class Light {
       g: 39,
       b: 39,
     };
+    
+    let darkness = colorMath.darknessGradient(254);
+
     if (this.state.on) {
       if (this.lightMode === "xy") {
         color = colorMath.XYtoRGB(this.state);
@@ -113,8 +116,8 @@ class Light {
       } else {
         color = colorMath.RGBmaxSaturation(colorMath.HSVtoRGB(this.state));
       }
-    }
-    let darkness = colorMath.darknessGradient(this.state.bri);
+      darkness = colorMath.darknessGradient(this.state.bri);
+    } 
 
     this.getDomAdress().setAttribute("style", `background: ${darkness}, rgb(${color.r},${color.g},${color.b})`);
     
