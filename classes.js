@@ -74,6 +74,16 @@ class Light {
       this.state.on = checkBox.checked;
       this.renderState();
       this.sendState();
+      
+      // renders the state from the lights
+      rooms.forEach(room => {
+        room.checkState();
+        room.renderState();
+      });
+      zones.forEach(zone => {
+        zone.checkState();
+        zone.renderState();
+      }); 
     });
   }
   getDomAdress() {
@@ -87,15 +97,6 @@ class Light {
     Object.entries(newState).forEach(entry => this.state[entry[0]] = entry[1]);
     
     this.renderState();
-    
-    // render the Groups
-    rooms.forEach(room => {
-      room.renderState();
-    });
-
-    zones.forEach(zone => {
-      zone.renderState();
-    });
   }
 
   renderState() {
