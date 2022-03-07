@@ -324,18 +324,26 @@ class Group {
   getIcon() {}
   getType() {}
   checkState() {
+    let briSum = 0;
     let anyOn = false;
+
     this.lightIDs.forEach(lightID => {
-      if (allLights.find(light => light.getLightID() === lightID).getState("on")) anyOn = true;
+      const thisLight = allLights.find(light => lightID === light.getlightID());
+
+      if (thisLight.getState("on")) {
+        anyOn = true;
+        briSum += parseInt(thisLight.getState("bri"));
+      }
     });
+
+    // calculate the new brightness
+    this.state.bri = briSum / this.lightIDs.length; // no problems because there are no empty groups
 
     if (anyOn) {
       this.state.on = true;
     } else {
       this.state.on = false;
     }
-
-    this.renderState();
   }
   getDomAdress() {
     return document.querySelector(`#group${this.groupID}`);
@@ -378,10 +386,8 @@ class Group {
       this.state.on = checkBox.checked;
       this.renderState();
       this.lightIDs.forEach(lightIDInThisGroup => {
-        // TODO calc the brightness
         allLights.find(light => light.getlightID() === lightIDInThisGroup).setState({
           on: this.state.on,
-          // bri: this.state.bri
         });
       });
 
@@ -393,8 +399,14 @@ class Group {
     slider.addEventListener("input", () => {
       this.state.bri = slider.querySelector("input[type=range]").value;
       
-      zones.forEach(zone => zone.renderState());
-      rooms.forEach(room => room.renderState());
+      this.lightIDs.forEach(lightIDInThisGroup => {
+        allLights.find(light => light.getlightID() === lightIDInThisGroup).setState({
+          bri: this.state.bri,
+        });
+      });
+
+      zones.forEach(zone => {zone.checkState(); zone.renderState();});
+      rooms.forEach(room => {room.checkState(); room.renderState();});
       throttle(() => this.sendState());
     });
   }
@@ -455,13 +467,14 @@ class Group {
     const range = slider.querySelector("input[type=range]");
     const prog = slider.querySelector(".progress");
 
-    const width = Math.max(slider.offsetWidth / range.max * range.value, 10);
-
+    
     if (!this.state.on) {
       range.value = 1;
     } else {
       range.value = this.state.bri;
     }
+
+    const width = Math.max(slider.offsetWidth / range.max * range.value, 10);
 
     prog.style.width = `${width}px`;
     prog.style["margin-right"] = `${0-width}px`;
