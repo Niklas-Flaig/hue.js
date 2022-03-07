@@ -82,8 +82,20 @@ class Light {
   setState(newMode, newState) {
     // newState is an object;
     this.lightMode = newMode;
-    this.state = newState;
+
+    // modify all values seperately
+    Object.entries(newState).forEach(entry => this.state[entry[0]] = entry[1]);
+    
     this.renderState();
+    
+    // render the Groups
+    rooms.forEach(room => {
+      room.renderState();
+    });
+
+    zones.forEach(zone => {
+      zone.renderState();
+    });
   }
 
   renderState() {
@@ -225,6 +237,14 @@ class Scene {
   addEventListeners() {
     this.getDomAdress().addEventListener("click", () => {
       this.activateScene();
+
+      this.lights.forEach(lightInScene => {
+        allLights.find(lightInAll => lightInAll.getlightID() === lightInScene.lightID).setState(lightInScene.lightMode, lightInScene.state);
+      });
+  
+      // renders the state from the lights
+      rooms.forEach(group => group.renderState());
+      zones.forEach(group => group.renderState());
     });
   }
 
@@ -272,14 +292,6 @@ class Scene {
       this.renderState();
   }
   activateScene() {
-    this.lights.forEach(lightInScene => {
-      allLights.find(lightInAll => lightInAll.getlightID() === lightInScene.lightID).setState(lightInScene.lightMode, lightInScene.state);
-    });
-
-    // renders the state from the lights
-    rooms.forEach(group => group.renderState());
-    zones.forEach(group => group.renderState());
-
     doHTML("PUT", `{
       "scene": "${this.sceneID}"
     }`, `groups/0/action`);
@@ -372,7 +384,6 @@ class Group {
       if (thisLight.state.bri > 1) gradientColors.push(colorMath.RGBmaxSaturation(thisLight.getColor("rgb")));
     });
 
-    console.log(gradientColors);
     let gradient = "rgb(39,39,39) 50%";
     
     if (gradientColors.length > 0) {
