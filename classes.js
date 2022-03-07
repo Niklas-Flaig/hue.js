@@ -253,8 +253,14 @@ class Scene {
       });
   
       // renders the state from the lights
-      rooms.forEach(group => group.renderState());
-      zones.forEach(group => group.renderState());
+      rooms.forEach(room => {
+        room.checkState();
+        room.renderState();
+      });
+      zones.forEach(zone => {
+        zone.checkState();
+        zone.renderState();
+      });
     });
   }
 
@@ -464,6 +470,7 @@ class Group {
     /* render the toggle */
     /* render the toggle*/
     const checkBox = this.getDomAdress().querySelector(".switcher");
+    console.log(checkBox.checked);
     checkBox.checked = this.state.on;
 
 
