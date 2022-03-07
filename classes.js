@@ -371,7 +371,9 @@ class Group {
 
     slider.addEventListener("input", () => {
       this.state.bri = slider.querySelector("input[type=range]").value;
-      this.renderState();
+      
+      zones.forEach(zone => zone.renderState());
+      rooms.forEach(room => room.renderState());
       throttle(() => this.sendState());
     });
   }
@@ -389,6 +391,7 @@ class Group {
     });
 
     let gradient = "rgb(39,39,39) 50%";
+    let darkness = colorMath.darknessGradient(254);
     
     if (gradientColors.length > 0) {
       gradientColors = colorMath.sortRGBvalues(gradientColors);
@@ -405,9 +408,11 @@ class Group {
 
         if (a + 1 < gradientColors.length) gradient += ",";
       }
+
+      darkness = colorMath.darknessGradient(this.state.bri);
+      
     }
 
-    const darkness = colorMath.darknessGradient(this.state.bri);
     
     let gradientAttribute = `background: ${gradient}`;
     if (gradientColors.length > 1) gradientAttribute = `background-image: linear-gradient(90deg,${gradient})`;
