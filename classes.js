@@ -483,6 +483,15 @@ class Group {
 
     prog.style.width = `${width}px`;
     prog.style["margin-right"] = `${0-width}px`;
+
+
+    // render the Font
+    let primeColor = "var(--white)";
+    if (this.state.bri > 127 && this.state.on) {
+      primeColor = "var(--black)";
+    }
+    this.getDomAdress().querySelectorAll("span").forEach(span => span.setAttribute("style", `color: ${primeColor}`));
+  
   }
 
   sendState() {
