@@ -325,6 +325,7 @@ class Group {
   getType() {}
   checkState() {
     let briSum = 0;
+    let onLights = 0;
     let anyOn = false;
 
     this.lightIDs.forEach(lightID => {
@@ -333,11 +334,12 @@ class Group {
       if (thisLight.getState("on")) {
         anyOn = true;
         briSum += parseInt(thisLight.getState("bri"));
+        onLights++;
       }
     });
 
     // calculate the new brightness
-    this.state.bri = briSum / this.lightIDs.length; // no problems because there are no empty groups
+    this.state.bri = briSum / onLights; // no problems because there are no empty groups
 
     if (anyOn) {
       this.state.on = true;
