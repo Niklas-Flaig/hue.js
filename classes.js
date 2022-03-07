@@ -151,6 +151,13 @@ class Light {
     }
   }
 
+  getState(key = undefined) {
+    if (key === undefined) {
+      return this.state;
+    } else {
+      return this.state[key];
+    }
+  }
 
   sendState() {
     let res;
@@ -316,6 +323,20 @@ class Group {
   getLightIDs() {}
   getIcon() {}
   getType() {}
+  checkState() {
+    let anyOn = false;
+    this.lightIDs.forEach(lightID => {
+      if (allLights.find(light => light.getLightID() === lightID).getState("on")) anyOn = true;
+    });
+
+    if (anyOn) {
+      this.state.on = true;
+    } else {
+      this.state.on = false;
+    }
+
+    this.renderState();
+  }
   getDomAdress() {
     return document.querySelector(`#group${this.groupID}`);
   }
