@@ -166,6 +166,18 @@ h1 {
 #content {
   display: flex;
   flex-direction: row;
+
+  #right {
+    width: 100%;
+
+    #scenesWrapper {
+      margin: 0 0 0 48px;
+
+      height: fit-content;
+
+      overflow-x: auto;
+    }
+  }
 }
 
 #header {
@@ -176,7 +188,7 @@ h1 {
 
 #scenes {
   height: 252px;
-  margin: 4px 0 24px 48px;
+  margin: 4px 0 24px 0;
 
   display: flex;
   flex-direction: column;
@@ -310,6 +322,7 @@ h1 {
     margin: 0 8px;
 
     background: #8DD3B5;
+    transition: background-color 200ms linear;
     border-radius: var(--corners);
     box-shadow: var(--shadowCard);
     
