@@ -385,7 +385,7 @@ class Group {
       // get the light that is reffrered to in the group
       const thisLight = allLights.find(light => light.lightID === lightID);
 
-      if (thisLight.state.bri > 1) gradientColors.push(colorMath.RGBmaxSaturation(thisLight.getColor("rgb")));
+      if (thisLight.state.on) gradientColors.push(colorMath.RGBmaxSaturation(thisLight.getColor("rgb")));
     });
 
     let gradient = "rgb(39,39,39) 50%";
