@@ -79,9 +79,9 @@ class Light {
   getDomAdress() {
     return document.querySelector(`#light${this.getlightID()}`);
   }
-  setState(newMode, newState) {
+  setState(newState, newMode = undefined) {
     // newState is an object;
-    this.lightMode = newMode;
+    if (newMode !== undefined) this.lightMode = newMode;
 
     // modify all values seperately
     Object.entries(newState).forEach(entry => this.state[entry[0]] = entry[1]);
@@ -239,7 +239,7 @@ class Scene {
       this.activateScene();
 
       this.lights.forEach(lightInScene => {
-        allLights.find(lightInAll => lightInAll.getlightID() === lightInScene.lightID).setState(lightInScene.lightMode, lightInScene.state);
+        allLights.find(lightInAll => lightInAll.getlightID() === lightInScene.lightID).setState(lightInScene.state, lightInScene.lightMode);
       });
   
       // renders the state from the lights
@@ -357,7 +357,11 @@ class Group {
       this.state.on = checkBox.checked;
       this.renderState();
       this.lightIDs.forEach(lightIDInThisGroup => {
-        allLights.find(light => light.getlightID === lightIDInThisGroup).setState("xy", );
+        // TODO calc the brightness
+        allLights.find(light => light.getlightID() === lightIDInThisGroup).setState({
+          on: this.state.on,
+          // bri: this.state.bri
+        });
       });
 
       this.sendState();
