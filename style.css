@@ -178,23 +178,33 @@ h1 {
   width: 100%;
 }
 
-#content #right #scenesWrapper {
-  margin: 0 0 0 48px;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  overflow-x: auto;
-}
-
 #header {
   height: 104px;
   background: var(--white);
   border-radius: 0 0 16px 16px;
 }
 
-#scenes {
+#scenesWrapper {
+  margin: 4px 0 24px 48px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+#scenesWrapper::-webkit-scrollbar {
+  display: none;
+}
+
+#scenesWrapper #scenes {
   height: 252px;
-  margin: 4px 0 24px 0;
+  margin: 0;
+  -webkit-transition: margin 500ms;
+  transition: margin 500ms;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -212,7 +222,7 @@ h1 {
   width: fit-content;
 }
 
-#scenes .scene {
+#scenesWrapper #scenes .scene {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   width: 152px;
@@ -238,7 +248,7 @@ h1 {
           align-items: center;
 }
 
-#scenes .scene .sceneName {
+#scenesWrapper #scenes .scene .sceneName {
   width: 128px;
   height: 46px;
   display: -webkit-box;
@@ -258,7 +268,7 @@ h1 {
           justify-content: center;
 }
 
-#scenes .scene .sceneName span {
+#scenesWrapper #scenes .scene .sceneName span {
   font-family: Arial;
   font-style: normal;
   font-weight: bold;
@@ -268,18 +278,18 @@ h1 {
   color: var(--white);
 }
 
-#scenes .scene .sceneName span.word {
+#scenesWrapper #scenes .scene .sceneName span.word {
   margin: 0 2.5px;
 }
 
-#scenes .scene .sceneGradient {
+#scenesWrapper #scenes .scene .sceneGradient {
   width: 112px;
   height: 16px;
   border-radius: 8px;
   background: var(--white);
 }
 
-#scenes .scene .sceneGradient .blurEffect {
+#scenesWrapper #scenes .scene .sceneGradient .blurEffect {
   -webkit-box-shadow: var(--shadowInset);
           box-shadow: var(--shadowInset);
   width: 100%;

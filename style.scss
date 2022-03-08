@@ -169,14 +169,6 @@ h1 {
 
   #right {
     width: 100%;
-
-    #scenesWrapper {
-      margin: 0 0 0 48px;
-
-      height: fit-content;
-
-      overflow-x: auto;
-    }
   }
 }
 
@@ -186,72 +178,88 @@ h1 {
   border-radius: 0 0 16px 16px;
 }
 
-#scenes {
-  height: 252px;
-  margin: 4px 0 24px 0;
+#scenesWrapper {
+  margin: 4px 0 24px 48px;
 
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  width: fit-content;
-  
-  .scene {
-    box-sizing: border-box;
-    width: 152px;
-    height: 118px;
-    margin: 0 8px;
-    
-    background: var(--black2);
-    border-radius: var(--corners);
-    box-shadow: var(--shadowCard);
-  
+  height: fit-content;
 
-    padding: 20px 12px 16px 12px;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+
+  #scenes {
+    height: 252px;
+    margin: 0;
+
+    transition: margin 500ms;
+  
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center;
-
-    .sceneName {
-      width: 128px;
-      height: 46px;
-
+    width: fit-content;
+    
+    .scene {
+      box-sizing: border-box;
+      width: 152px;
+      height: 118px;
+      margin: 0 8px;
+      
+      background: var(--black2);
+      border-radius: var(--corners);
+      box-shadow: var(--shadowCard);
+    
+  
+      padding: 20px 12px 16px 12px;
       display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
+      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      
-      
-      span {
-        font-family: Arial;
-        font-style: normal;
-        font-weight: bold;
-        font-size: var(--defaultFont);
-        line-height: 22.5px;
-        text-justify: center;
-        color: var(--white);
-
-        &.word {
-          margin: 0 2.5px;
+  
+      .sceneName {
+        width: 128px;
+        height: 46px;
+  
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        
+        
+        span {
+          font-family: Arial;
+          font-style: normal;
+          font-weight: bold;
+          font-size: var(--defaultFont);
+          line-height: 22.5px;
+          text-justify: center;
+          color: var(--white);
+  
+          &.word {
+            margin: 0 2.5px;
+          }
         }
       }
-    }
-
-    .sceneGradient {
-      width: 112px;
-      height: 16px;
-      border-radius: 8px;
-      
-      background: var(--white);
-
-      .blurEffect {
-        box-shadow: var(--shadowInset);
-        width: 100%;
-        height: 100%;
+  
+      .sceneGradient {
+        width: 112px;
+        height: 16px;
         border-radius: 8px;
-        backdrop-filter: blur(8px);
+        
+        background: var(--white);
+  
+        .blurEffect {
+          box-shadow: var(--shadowInset);
+          width: 100%;
+          height: 100%;
+          border-radius: 8px;
+          backdrop-filter: blur(8px);
+        }
       }
     }
   }

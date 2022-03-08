@@ -99,3 +99,42 @@ function doHTML(command, content, urlAddition = "") {
     }
   }
 }
+
+let mouseOverScenes = false;
+document.querySelector("#scenesWrapper").addEventListener("mouseenter", () => mouseOverScenes = true);
+document.querySelector("#scenesWrapper").addEventListener("mouseleave", () => mouseOverScenes = false);
+
+let mouseOverLights = false;
+document.querySelector("#lights").addEventListener("mouseenter", () => mouseOverLights = true);
+document.querySelector("#lights").addEventListener("mouseleave", () => mouseOverLights = false);
+
+
+document.addEventListener("wheel", (data) => {
+
+  if (mouseOverScenes) {
+    const scenesDiv = document.querySelector("#scenes");
+  
+    let position = scenesDiv.style.marginLeft;
+    position = position.replace('px', '');
+    if (position === "") position = 0;
+    position = parseInt(position);
+  
+  
+    const scenesWidth = document.querySelector("#scenesWrapper").offsetWidth;
+
+    let sceneLength = scenes.length;
+    if (sceneLength % 2) sceneLength = sceneLength++;
+    sceneLength = (sceneLength / 2 + 6) * 168;
+  
+    if (data.deltaY < 0 && position < 0) {
+  
+      scenesDiv.setAttribute("style", `margin-left: ${position + 168}px`);
+  
+    } else if (data.deltaY > 0 && position > scenesWidth - sceneLength) {
+  
+      scenesDiv.setAttribute("style", `margin-left: ${position - 168}px`);
+  
+    }
+  }
+
+});
