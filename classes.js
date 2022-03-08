@@ -494,7 +494,6 @@ class Group {
     /* render the toggle */
     /* render the toggle*/
     const checkBox = this.getDomAdress().querySelector(".switcher");
-    console.log(checkBox.checked);
     checkBox.checked = this.state.on;
 
 

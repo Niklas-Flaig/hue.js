@@ -150,10 +150,6 @@ document.addEventListener("wheel", (data) => {
     let lightsLength = allLights.length;
     if (lightsLength % 2) lightsLength = lightsLength--;
     lightsLength = lightsLength * 168;
-  
-    console.log(lightsLength);
-    console.log(lightsWidth);
-    console.log(position);
 
     if (data.deltaY < 0 && position < 0) {
   
