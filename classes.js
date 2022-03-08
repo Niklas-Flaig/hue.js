@@ -349,7 +349,7 @@ class Group {
     });
 
     // calculate the new brightness
-    this.state.bri = briSum / onLights; // no problems because there are no empty groups
+    if (onLights !== 0) this.state.bri = briSum / onLights;
 
     if (anyOn) {
       this.state.on = true;
