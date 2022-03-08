@@ -105,8 +105,8 @@ document.querySelector("#scenesWrapper").addEventListener("mouseenter", () => mo
 document.querySelector("#scenesWrapper").addEventListener("mouseleave", () => mouseOverScenes = false);
 
 let mouseOverLights = false;
-document.querySelector("#lights").addEventListener("mouseenter", () => mouseOverLights = true);
-document.querySelector("#lights").addEventListener("mouseleave", () => mouseOverLights = false);
+document.querySelector("#lightsWrapper").addEventListener("mouseenter", () => mouseOverLights = true);
+document.querySelector("#lightsWrapper").addEventListener("mouseleave", () => mouseOverLights = false);
 
 
 document.addEventListener("wheel", (data) => {
@@ -123,18 +123,46 @@ document.addEventListener("wheel", (data) => {
     const scenesWidth = document.querySelector("#scenesWrapper").offsetWidth;
 
     let sceneLength = scenes.length;
-    if (sceneLength % 2) sceneLength = sceneLength++;
-    sceneLength = (sceneLength / 2 + 6) * 168;
+    if (sceneLength % 2) sceneLength++;
+    sceneLength = (sceneLength / 2) * 168;
   
     if (data.deltaY < 0 && position < 0) {
   
       scenesDiv.setAttribute("style", `margin-left: ${position + 168}px`);
   
-    } else if (data.deltaY > 0 && position > scenesWidth - sceneLength) {
+    } else if (data.deltaY > 0 && position > -sceneLength + 2 * 168) {
   
       scenesDiv.setAttribute("style", `margin-left: ${position - 168}px`);
   
     }
   }
 
+  if (mouseOverLights) {
+    const lightsDiv = document.querySelector("#lights");
+  
+    let position = lightsDiv.style.marginLeft;
+    position = position.replace('px', '');
+    if (position === "") position = 0;
+    position = parseInt(position);
+
+    const lightsWidth = document.querySelector("#lightsWrapper").offsetWidth;
+
+    let lightsLength = allLights.length;
+    if (lightsLength % 2) lightsLength = lightsLength--;
+    lightsLength = lightsLength * 168;
+  
+    console.log(lightsLength);
+    console.log(lightsWidth);
+    console.log(position);
+
+    if (data.deltaY < 0 && position < 0) {
+  
+      lightsDiv.setAttribute("style", `margin-left: ${position + 168}px`);
+  
+    } else if (data.deltaY > 0 && position > lightsWidth - lightsLength) {
+  
+      lightsDiv.setAttribute("style", `margin-left: ${position - 168}px`);
+  
+    }
+  }
 });

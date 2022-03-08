@@ -373,8 +373,24 @@ h1 {
   color: var(--white);
 }
 
-#lights {
+#lightsWrapper {
   margin: 4px 0 24px 48px;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+#lightsWrapper::-webkit-scrollbar {
+  display: none;
+}
+
+#lightsWrapper #lights {
+  margin: 0;
+  width: 168px;
+  -webkit-transition: margin 500ms;
+  transition: margin 500ms;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -382,12 +398,9 @@ h1 {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
 }
 
-#lights .light {
+#lightsWrapper #lights .light {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   width: 152px;
@@ -401,7 +414,7 @@ h1 {
           box-shadow: var(--shadowCard);
 }
 
-#lights .light .gradient {
+#lightsWrapper #lights .light .gradient {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   width: 100%;
@@ -423,7 +436,7 @@ h1 {
           align-items: center;
 }
 
-#lights .light .gradient .top {
+#lightsWrapper #lights .light .gradient .top {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   width: 100%;
@@ -444,7 +457,7 @@ h1 {
           align-items: center;
 }
 
-#lights .light .gradient .top .icon {
+#lightsWrapper #lights .light .gradient .top .icon {
   height: 48px;
   width: 48px;
   fill: var(--white);
@@ -452,7 +465,7 @@ h1 {
   stroke-width: 0;
 }
 
-#lights .light .gradient .top .lightName {
+#lightsWrapper #lights .light .gradient .top .lightName {
   width: 128px;
   height: 46px;
   display: -webkit-box;
@@ -472,7 +485,7 @@ h1 {
           justify-content: center;
 }
 
-#lights .light .gradient .top .lightName span {
+#lightsWrapper #lights .light .gradient .top .lightName span {
   font-family: Arial;
   font-style: normal;
   font-weight: bold;
@@ -482,11 +495,11 @@ h1 {
   color: var(--white);
 }
 
-#lights .light .gradient .top .lightName span.word {
+#lightsWrapper #lights .light .gradient .top .lightName span.word {
   margin: 0 2.5px;
 }
 
-#lights .light .gradient .bottom {
+#lightsWrapper #lights .light .gradient .bottom {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   width: 100%;
