@@ -124,7 +124,7 @@ class Light {
     
     
     let primeColor = "var(--white)";
-    if (this.state.bri > 127 && this.state.on) {
+    if (color.r + color.g * 1 + color.b * 0.6 > 400 && this.state.on) {
       primeColor = "var(--black)";
     }
 
