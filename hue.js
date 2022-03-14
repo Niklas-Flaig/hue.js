@@ -18,7 +18,7 @@ doHTML("GET", res => {
   // get the data for each individual scene
   Object.entries(res).forEach(scene => doHTML("GET", sceneRes => {
     
-    if (sceneRes.type === "GroupScene") {
+    if (sceneRes.type === "GroupScene" && !sceneRes.recycle) {
       const newScene = new Scene(scene[0], sceneRes);
       
       newScene.addToHtml("#scenes");
