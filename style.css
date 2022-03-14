@@ -32,6 +32,7 @@ h1 {
   letter-spacing: 0em;
   text-align: left;
   color: var(--white);
+  cursor: default;
 }
 
 .toggle {
@@ -44,6 +45,7 @@ h1 {
   -webkit-box-shadow: var(--shadowInset);
           box-shadow: var(--shadowInset);
   padding: 4px;
+  cursor: pointer;
 }
 
 .toggle .switcher {
@@ -61,6 +63,7 @@ h1 {
   transition: -webkit-transform 0.1s ease-in-out;
   transition: transform 0.1s ease-in-out;
   transition: transform 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
+  cursor: pointer;
 }
 
 .toggle .switcher:checked {
@@ -78,6 +81,7 @@ h1 {
   -webkit-box-shadow: var(--shadowInset);
           box-shadow: var(--shadowInset);
   padding: 3px;
+  cursor: pointer;
 }
 
 .toggleSmall .switcher {
@@ -95,6 +99,7 @@ h1 {
   transition: -webkit-transform 0.1s ease-in-out;
   transition: transform 0.1s ease-in-out;
   transition: transform 0.1s ease-in-out, -webkit-transform 0.1s ease-in-out;
+  cursor: pointer;
 }
 
 .toggleSmall .switcher:checked {
@@ -141,6 +146,7 @@ h1 {
   background: none;
   border-radius: 4px;
   outline: none;
+  cursor: pointer;
 }
 
 .slider input[type=range]::-webkit-slider-thumb {
@@ -246,6 +252,7 @@ h1 {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  cursor: pointer;
 }
 
 #scenesWrapper #scenes .scene .sceneName {
@@ -371,6 +378,7 @@ h1 {
   font-size: var(--defaultFont);
   line-height: 22.5px;
   color: var(--white);
+  cursor: default;
 }
 
 #lightsWrapper {
@@ -493,6 +501,7 @@ h1 {
   line-height: 22.5px;
   text-justify: center;
   color: var(--white);
+  cursor: default;
 }
 
 #lightsWrapper #lights .light .gradient .top .lightName span.word {
