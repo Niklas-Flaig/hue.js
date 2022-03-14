@@ -442,7 +442,7 @@ class Group {
         }
       });
 
-      throttle(() => this.sendState());
+      throttle(() => this.sendState("bri"));
     });
   }
 
@@ -524,10 +524,20 @@ class Group {
   
   }
 
-  sendState() {
+  sendState(key) {
+    let message = "";
+
+    if (key === undefined) {
+      message = `
+        "on": ${this.state.on},
+        "bri": ${this.state.bri},
+      `;
+    } else {
+      message += `"${key}": ${this.state[key]},`;
+    }
+
     doHTML("PUT", `{
-      "on": ${this.state.on},
-      "bri": ${this.state.bri},
+      ${message}
       "transitiontime": 5
     }`, `groups/${this.groupID}/action`);
   }
