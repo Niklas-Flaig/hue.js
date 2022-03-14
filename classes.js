@@ -421,6 +421,16 @@ class Group {
     const slider = this.getDomAdress().querySelector(".slider");
 
     slider.addEventListener("input", () => {
+      if (!this.state.on) {
+        this.state.on = true;
+        this.lightIDs.forEach(lightIDInThisGroup => {
+          allLights.find(light => light.getlightID() === lightIDInThisGroup).setState({
+            on: this.state.on,
+          });
+        });
+        this.sendState();
+      }
+
       this.state.bri = slider.querySelector("input[type=range]").value;
       
       this.lightIDs.forEach(lightIDInThisGroup => {
