@@ -402,7 +402,8 @@ h1 {
             width: 128px;
             height: 46px;
     
-            display: flex;
+            // display: flex;
+            display: none;
             flex-direction: row;
             flex-wrap: wrap;
             align-items: center;
@@ -422,6 +423,38 @@ h1 {
               &.word {
                 margin: 0 2.5px;
               }
+            }
+          }
+
+          .hexCode {
+            font-family: Arial;
+            font-style: normal;
+            font-weight: bold;
+            font-size: var(--defaultFont);
+            line-height: 22.5px;
+            color: var(--black2);
+
+            cursor: pointer;
+
+            input {
+              font: inherit;
+              color: inherit;
+
+              width: 70px;
+              background: none;
+              border: none;
+
+              cursor: inherit;
+
+              &:focus {
+                outline: none;
+              }
+            }
+
+            &:focus-within {
+              color: var(--black);
+              border-bottom: solid 2px var(--black);
+              margin-bottom: -2px;
             }
           }
         }

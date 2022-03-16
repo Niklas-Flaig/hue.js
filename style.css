@@ -476,9 +476,7 @@ h1 {
 #lightsWrapper #lights .light .gradient .top .lightName {
   width: 128px;
   height: 46px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
@@ -506,6 +504,35 @@ h1 {
 
 #lightsWrapper #lights .light .gradient .top .lightName span.word {
   margin: 0 2.5px;
+}
+
+#lightsWrapper #lights .light .gradient .top .hexCode {
+  font-family: Arial;
+  font-style: normal;
+  font-weight: bold;
+  font-size: var(--defaultFont);
+  line-height: 22.5px;
+  color: var(--black2);
+  cursor: pointer;
+}
+
+#lightsWrapper #lights .light .gradient .top .hexCode input {
+  font: inherit;
+  color: inherit;
+  width: 70px;
+  background: none;
+  border: none;
+  cursor: inherit;
+}
+
+#lightsWrapper #lights .light .gradient .top .hexCode input:focus {
+  outline: none;
+}
+
+#lightsWrapper #lights .light .gradient .top .hexCode:focus-within {
+  color: var(--black);
+  border-bottom: solid 2px var(--black);
+  margin-bottom: -2px;
 }
 
 #lightsWrapper #lights .light .gradient .bottom {

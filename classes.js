@@ -45,12 +45,15 @@ class Light {
     lightDiv.innerHTML += `
       <div class="light" id="light${this.getlightID()}">
         <div class="gradient">
-          <div class="top">
+          <div class="top default">
             <svg class="icon" viewBox="0 0 32 32">
               ${this.getIcon()}
             </svg>
             <div class="lightName">
               ${nameSpans}
+            </div>
+            <div class="hexCode">
+              # <input maxlength="6" class="hexCodeInput">
             </div>
           </div>
           <div class="bottom">
@@ -84,6 +87,19 @@ class Light {
         zone.checkState();
         zone.renderState();
       });
+    });
+
+
+    this.getDomAdress().querySelector(".hexCodeInput").addEventListener("keyup", (event) => {
+      if (event.key === "Enter") {
+        console.log(colorMath.RGBtoHSV(colorMath.HEXtoRGB(this.getDomAdress().querySelector(".hexCodeInput").value)));
+        this.setState(
+          colorMath.RGBtoHSV(colorMath.HEXtoRGB(this.getDomAdress().querySelector(".hexCodeInput").value)),
+          "hsv"
+        );
+        this.sendState();
+        this.renderState();
+      }
     });
   }
   getDomAdress() {
@@ -119,6 +135,8 @@ class Light {
       }
       darkness = colorMath.darknessGradient(this.state.bri);
     }
+
+    this.getDomAdress().querySelector(".hexCodeInput").value = colorMath.RGBtoHEX(colorMath.HSVtoRGB(this.state));
 
     this.getDomAdress().setAttribute("style", `background: ${darkness}, rgb(${color.r},${color.g},${color.b})`);
     
