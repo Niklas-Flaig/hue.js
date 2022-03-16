@@ -70,6 +70,91 @@ const geometry = {
   }
 };
 
+function DECtoHEX(decNum) {
+  let hex = [0];
+
+  for (let x = 0; x < decNum; x++) {
+    hex[hex.length - 1]++;
+
+    for (let y = hex.length; y > 0; y--) {
+      if (hex[y - 1] >= 16) {
+        hex[y - 1] = 0;
+
+        if (y - 1 === 0) {
+          hex.splice(0, 0, 0);
+          y++;
+        }
+
+        hex[y - 2]++;
+      }
+    }
+  }
+
+  let hexText = "";
+
+  hex.forEach(digit => {
+    if (digit < 10) {
+      hexText += digit;
+    } else {
+      switch (digit) {
+        case 10: hexText += "A";
+          break;
+        case 11: hexText += "B";
+          break;
+        case 12: hexText += "C";
+          break;
+        case 13: hexText += "D";
+          break;
+        case 14: hexText += "E";
+          break;
+        case 15: hexText += "F";
+          break;
+      }
+    }
+  });
+
+  return hexText;
+}
+
+function HEXtoDEC(hexNum) {
+  let hex = hexNum.split("");
+
+  for (let x = 0; x < hex.length; x++) {
+    switch (hex[x]) {
+      case "A": hex[x] = 10;
+        break;
+      case "B": hex[x] = 11;
+        break;
+      case "C": hex[x] = 12;
+        break;
+      case "D": hex[x] = 13;
+        break;
+      case "E": hex[x] = 14;
+        break;
+      case "F": hex[x] = 15;
+        break;
+      default: hex[x] = parseInt(hex[x]);
+    }
+  }
+
+  let decNum = -1;
+
+  for (let x = 0; x < hex.length; x++) {
+    decNum += hex[x] * Math.pow(16, hex.length - (x + 1));
+  }
+
+  return decNum;
+}
+
+function toDecimal(numbers, system = 2) {
+  let res = 0;
+  for (let x = 0; x < numbers.length; x++) {
+    if (numbers[x] === 1) res += Math.pow(system, numbers.length - (x + 1));
+  }
+  return res;
+}
+
+
 function map(value, minStart, maxStart, minGoal, maxGoal) {
   return (value - minStart) / (maxStart - minStart) * (maxGoal - minGoal) + minGoal;
 }
