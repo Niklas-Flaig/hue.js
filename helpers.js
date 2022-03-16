@@ -182,6 +182,30 @@ const colorMath = {
       b: map(val.b, 0, maxVal, 0, 255)
     };
   },
+  RGBtoHEX: (val) => {
+    let color = [
+      DECtoHEX(val.r),
+      DECtoHEX(val.g),
+      DECtoHEX(val.b)
+    ];
+
+    let text = "";
+
+    for (let x = 0; x < color.length; x++) {
+      if (color[x] === "0") color[x] = "00";
+      text += color[x];
+    }
+
+    return text;
+  },
+  HEXtoRGB: (val) => {
+    let hexText = val.split("");
+    return {
+      r: HEXtoDEC(hexText[0] + hexText[1]),
+      g: HEXtoDEC(hexText[2] + hexText[3]),
+      b: HEXtoDEC(hexText[4] + hexText[5])
+    };
+  },
   HSVtoRGB: (val) => {
     // transforms a hsv-value to a rgb-value
     let sat = map(val.sat, 0, 254, 0, 1);
