@@ -92,13 +92,13 @@ class Light {
 
     this.getDomAdress().querySelector(".hexCodeInput").addEventListener("keyup", (event) => {
       if (event.key === "Enter") {
+        console.log(colorMath.HEXtoRGB(this.getDomAdress().querySelector(".hexCodeInput").value));
         console.log(colorMath.RGBtoHSV(colorMath.HEXtoRGB(this.getDomAdress().querySelector(".hexCodeInput").value)));
         this.setState(
           colorMath.RGBtoHSV(colorMath.HEXtoRGB(this.getDomAdress().querySelector(".hexCodeInput").value)),
           "hsv"
         );
         this.sendState();
-        this.renderState();
       }
     });
   }
@@ -387,11 +387,11 @@ class Group {
         <div class="blurEffect">
           <div class="top">
           
-          <span class="zoneName">${this.name}</span>
-          
-          <label class="toggleSmall">
-            <input class="switcher" type="checkbox">
-          </label>
+            <span class="zoneName">${this.name}</span>
+            
+            <label class="toggleSmall">
+              <input class="switcher" type="checkbox">
+            </label>
           
           </div>
           <div class="slider">
@@ -571,3 +571,11 @@ class Group {
   }
 
 }
+
+// wenn eine Grupeee helligkeit ändert sollen auch deaktivierte helligkeit ändern (auch wenn sie deaktiviert bleiben)?
+
+// Hex-code eingabe möglichkeit
+
+// tatsächlicher Farbwähler
+
+// on Screen-Size-Change rerender Scenes/Lights positions

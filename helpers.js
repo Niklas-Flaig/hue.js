@@ -137,7 +137,7 @@ function HEXtoDEC(hexNum) {
     }
   }
 
-  let decNum = -1;
+  let decNum = 0;
 
   for (let x = 0; x < hex.length; x++) {
     decNum += hex[x] * Math.pow(16, hex.length - (x + 1));
@@ -186,13 +186,15 @@ const colorMath = {
     let color = [
       DECtoHEX(val.r),
       DECtoHEX(val.g),
-      DECtoHEX(val.b)
+      DECtoHEX(val.b),
     ];
+    console.log(val);
+    console.log(color);
 
     let text = "";
 
     for (let x = 0; x < color.length; x++) {
-      if (color[x] === "0") color[x] = "00";
+      if (color[x].length !== 2) color[x] = "0" + color[x];
       text += color[x];
     }
 
@@ -216,32 +218,32 @@ const colorMath = {
     let x = chrome * (1 - Math.abs(((hue/60.0) % 2 ) - 1));
     let m = bri - chrome;
     let r, g, b;
-    if(hue >= 0 && hue < 60){
+    if (hue >= 0 && hue < 60) {
       r = chrome;
       g = x;
       b = 0;
     }
-    else if(hue >= 60 && hue < 120){
+    else if (hue >= 60 && hue < 120) {
       r = x;
       g = chrome;
       b = 0;
     }
-    else if(hue >= 120 && hue < 180){
+    else if (hue >= 120 && hue < 180) {
       r = 0;
       g = chrome;
       b = x;
     }
-    else if(hue >= 180 && hue < 240){
+    else if (hue >= 180 && hue < 240) {
       r = 0; 
       g = x;
       b = chrome;
     }
-    else if(hue >= 240 && hue < 300){
+    else if (hue >= 240 && hue < 300) {
       r = x;
       g = 0;
       b = chrome;
     }
-    else{
+    else {
       r = chrome;
       g = 0;
       b = x;
@@ -272,22 +274,28 @@ const colorMath = {
     } else if (b === chromeMax) { // a mainly blue value
       hue = 60 * ((r - g) / (chromeMax - chromeMin) + 4);
     }
+
+    if (hue < 0) hue += 360;
+
+    hue = Math.round(map(hue, 0, 360, 0, 65535));
+
   
     if (chromeMax === 0) {
       sat = 0;
     } else {
-      sat = (chromeMax - chromeMin) / chromeMax;
+      sat = Math.round((chromeMax - chromeMin) / chromeMax * 254);
     }
   
-    bri = chrome;
+    bri = chromeMax * 254;
   
+    console.log({hue: hue, sat: sat, bri: bri});
     return {hue: hue, sat: sat, bri: bri};
   },
   XYtoRGB: (cPoint, bri = 255) => {
     const rPoint = {x: 0.6915, y: 0.3083};
     const gPoint = {x: 0.2581, y: 0.6338};
     const bPoint = {x: 0.1534, y: 0.0544};
-    const wPoint = {x: 0.3129, y: 0.3291};
+    const wPoint = {x: 0.3116, y: 0.3277};
   
     let color = {
       r: 0,

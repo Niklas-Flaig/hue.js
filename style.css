@@ -476,7 +476,9 @@ h1 {
 #lightsWrapper #lights .light .gradient .top .lightName {
   width: 128px;
   height: 46px;
-  display: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
@@ -507,6 +509,7 @@ h1 {
 }
 
 #lightsWrapper #lights .light .gradient .top .hexCode {
+  display: none;
   font-family: Arial;
   font-style: normal;
   font-weight: bold;
