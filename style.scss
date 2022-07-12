@@ -1,33 +1,31 @@
-:root {
-  --black: #181818;
-  --black2: #272727;
-  --white: #FFFFFF;
-  --transparentBlack: #18181847;
-  --sliderLeftWhite: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.6) 100%);
+$black: #181818;
+$black2: #272727;
+$white: #FFFFFF;
+$transparentBlack: #18181847;
+$sliderLeftWhite: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.6) 100%);
 
 
 
-  --shadowInsetAlt: 0px 1px 3px 0px #0000001A inset, 0px 2px 1px 0px #0000000F inset, 0px 1px 1px 0px #00000012 inset;
-  --shadowInset: 0px 1px 3px 0px #00000033 inset, 0px 2px 1px 0px #0000001F inset, 0px 1px 1px 0px #00000024 inset;
-  --shadowCard: 0px 1px 3px 0px #00000033, 0px 2px 1px 0px #0000001F, 0px 1px 1px 0px #00000024;
-  --shadowSliderInput: 0px 1px 3px 0px #00000033, 0px 2px 1px 0px #0000001F, 0px 1px 4px 1px #0000002E;
-  --shadowLightBottom: 0px 2px 1px 0px #0000001F inset, 0px 1px 1px 0px #00000024 inset;
-  
+$shadowInsetAlt: 0px 1px 3px 0px #0000001A inset, 0px 2px 1px 0px #0000000F inset, 0px 1px 1px 0px #00000012 inset;
+$shadowInset: 0px 1px 3px 0px #00000033 inset, 0px 2px 1px 0px #0000001F inset, 0px 1px 1px 0px #00000024 inset;
+$shadowCard: 0px 1px 3px 0px #00000033, 0px 2px 1px 0px #0000001F, 0px 1px 1px 0px #00000024;
+$shadowSliderInput: 0px 1px 3px 0px #00000033, 0px 2px 1px 0px #0000001F, 0px 1px 4px 1px #0000002E;
+$shadowLightBottom: 0px 2px 1px 0px #0000001F inset, 0px 1px 1px 0px #00000024 inset;
 
-  --gradientGroup: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.24) 80%, rgba(0, 0, 0, 0.4) 100%);
-  --gradientLight: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.24) 66%, rgba(0, 0, 0, 0.36) 100%);
-  --gradientLightBottom: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(24, 24, 24, 0.4) 100%);
 
-  --defaultFont: 18px;
+$gradientGroup: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.24) 80%, rgba(0, 0, 0, 0.4) 100%);
+$gradientLight: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.24) 66%, rgba(0, 0, 0, 0.36) 100%);
+$gradientLightBottom: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(24, 24, 24, 0.4) 100%);
 
-  --basicMargin: 24px;
+$defaultFont: 18px;
 
-  --corners: 12px;
-}
+$basicMargin: 24px;
+
+$corners: 12px;
 
 
 body {
-  background-color: var(--black);
+  background-color: $black;
   margin: 0;
 }
 
@@ -41,7 +39,7 @@ h1 {
   letter-spacing: 0em;
   text-align: left;
 
-  color: var(--white);
+  color: $white;
   
   cursor: default;
 
@@ -52,8 +50,8 @@ h1 {
   max-height: 40px;
   width: 72px;
   border-radius: 20px;
-  background: var(--transparentBlack);
-  box-shadow: var(--shadowInset);
+  background: $transparentBlack;
+  box-shadow: $shadowInset;
 
   padding: 4px;
 
@@ -65,7 +63,7 @@ h1 {
     height: 32px;
     margin: 0;
     border-radius: 16px;
-    background: var(--white);
+    background: $white;
     box-shadow: 0px 1px 3px 0px #00000033, 0px 2px 1px 0px #0000001F, 0px 1px 1px 0px #00000024;
     
     transition: transform 0.1s ease-in-out;
@@ -83,8 +81,8 @@ h1 {
   max-height: 30px;
   width: 54px;
   border-radius: 15px;
-  background: var(--transparentBlack);
-  box-shadow: var(--shadowInset);
+  background: $transparentBlack;
+  box-shadow: $shadowInset;
 
   padding: 3px;
 
@@ -96,7 +94,7 @@ h1 {
     height: 24px;
     margin: 0;
     border-radius: 12px;
-    background: var(--white);
+    background: $white;
     box-shadow: 0px 1px 3px 0px #00000033, 0px 2px 1px 0px #0000001F, 0px 1px 1px 0px #00000024;
     
     transition: transform 0.1s ease-in-out;
@@ -115,7 +113,7 @@ h1 {
   width: 280px;
   height: 8px;
 
-  background: var(--transparentBlack);
+  background: $transparentBlack;
   border-radius: 4px;
   
   display: flex;
@@ -125,7 +123,7 @@ h1 {
     height: 8px;
     border-radius: 4px;
     margin-right: -50%;
-    background: var(--sliderLeftWhite);
+    background: $sliderLeftWhite;
   }
 
   .sliderShadow {/* sits above progress*/
@@ -133,7 +131,7 @@ h1 {
     height: 8px;
     border-radius: 4px;
     margin-right: -280px;
-    box-shadow: var(--shadowInset);
+    box-shadow: $shadowInset;
   }
 
 
@@ -157,9 +155,9 @@ h1 {
       width: 16px;
       height: 16px;
   
-      background: var(--white);
+      background: $white;
       border-radius: 8px;
-      box-shadow: var(--shadowSliderInput);
+      box-shadow: $shadowSliderInput;
   
       cursor: pointer;
     }
@@ -167,9 +165,9 @@ h1 {
     &::-moz-range-thumb {
       width: 16px;
       height: 16px;
-      background: var(--white);
+      background: $white;
       border-radius: 8px;
-      box-shadow: var(--shadowSliderInput);
+      box-shadow: $shadowSliderInput;
   
       cursor: pointer;
     }
@@ -186,8 +184,9 @@ h1 {
 }
 
 #header {
-  height: 104px;
-  background: var(--white);
+  // height: 104px;
+  height: 40px;
+  background: transparent;
   border-radius: 0 0 16px 16px;
 }
 
@@ -222,9 +221,9 @@ h1 {
       height: 118px;
       margin: 0 8px;
       
-      background: var(--black2);
-      border-radius: var(--corners);
-      box-shadow: var(--shadowCard);
+      background: $black2;
+      border-radius: $corners;
+      box-shadow: $shadowCard;
     
   
       padding: 20px 12px 16px 12px;
@@ -250,10 +249,10 @@ h1 {
           font-family: Arial;
           font-style: normal;
           font-weight: bold;
-          font-size: var(--defaultFont);
+          font-size: $defaultFont;
           line-height: 22.5px;
           text-justify: center;
-          color: var(--white);
+          color: $white;
   
           &.word {
             margin: 0 2.5px;
@@ -266,10 +265,10 @@ h1 {
         height: 16px;
         border-radius: 8px;
         
-        background: var(--white);
+        background: $white;
   
         .blurEffect {
-          box-shadow: var(--shadowInset);
+          box-shadow: $shadowInset;
           width: 100%;
           height: 100%;
           border-radius: 8px;
@@ -294,16 +293,18 @@ h1 {
     height: 88px;
     margin: 0px 8px 16px 8px;
 
-    border-radius: var(--corners);
-    background: var(--gradientGroup), #8DD3B5;
-    box-shadow: var(--shadowCard);
+    border-radius: $corners;
+    background: #FFF;
+    box-shadow: $shadowCard;
+
 
     .blurEffect {
       box-sizing: border-box;
       width: 320px;
       height: 88px;
+      border: solid 0px transparent;
+      border-radius: $corners;
       backdrop-filter: blur(8px);
-      border-radius: var(--corners);
 
       display: flex;
       flex-direction: column;
@@ -323,9 +324,9 @@ h1 {
           font-family: Arial;
           font-style: normal;
           font-weight: bold;
-          font-size: var(--defaultFont);
+          font-size: $defaultFont;
           line-height: 22.5px;
-          color: var(--white);
+          color: $white;
 
           cursor: default;
 
@@ -360,18 +361,18 @@ h1 {
       height: 240px;
       margin: 0 8px;
   
-      background: #8DD3B5;
+      background: #FFF;
       transition: background-color 200ms linear;
-      border-radius: var(--corners);
-      box-shadow: var(--shadowCard);
+      border-radius: $corners;
+      box-shadow: $shadowCard;
       
       .gradient {
         box-sizing: border-box;
         width: 100%;
         height: 100%;
   
-        background: var(--gradientLight);
-        border-radius: var(--corners);
+        background: $gradientLight;
+        border-radius: $corners;
   
         display: flex;
         flex-direction: column;
@@ -393,7 +394,7 @@ h1 {
           .icon {
             height: 48px;
             width: 48px;
-            fill: var(--white);
+            fill: $white;
             stroke: none;
             stroke-width: 0;
           }
@@ -413,10 +414,10 @@ h1 {
               font-family: Arial;
               font-style: normal;
               font-weight: bold;
-              font-size: var(--defaultFont);
+              font-size: $defaultFont;
               line-height: 22.5px;
               text-justify: center;
-              color: var(--white);
+              color: $white;
               
               cursor: default;
 
@@ -432,9 +433,9 @@ h1 {
             font-family: Arial;
             font-style: normal;
             font-weight: bold;
-            font-size: var(--defaultFont);
+            font-size: $defaultFont;
             line-height: 22.5px;
-            color: var(--black2);
+            color: $black2;
 
             cursor: pointer;
 
@@ -454,8 +455,8 @@ h1 {
             }
 
             &:focus-within {
-              color: var(--black);
-              border-bottom: solid 2px var(--black);
+              color: $black;
+              border-bottom: solid 2px $black;
               margin-bottom: -2px;
             }
           }
@@ -467,9 +468,9 @@ h1 {
           height: 84px;
           padding: 22px 40px;
     
-          background: var(--gradientLightBottom);
-          border-radius: 0 0 var(--corners) var(--corners);
-          box-shadow: var(--shadowInset);
+          background: $gradientLightBottom;
+          border-radius: 0 0 $corners $corners;
+          box-shadow: $shadowInset;
     
           display: flex;
           flex-direction: column;

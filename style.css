@@ -1,24 +1,5 @@
-:root {
-  --black: #181818;
-  --black2: #272727;
-  --white: #FFFFFF;
-  --transparentBlack: #18181847;
-  --sliderLeftWhite: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.6) 100%);
-  --shadowInsetAlt: 0px 1px 3px 0px #0000001A inset, 0px 2px 1px 0px #0000000F inset, 0px 1px 1px 0px #00000012 inset;
-  --shadowInset: 0px 1px 3px 0px #00000033 inset, 0px 2px 1px 0px #0000001F inset, 0px 1px 1px 0px #00000024 inset;
-  --shadowCard: 0px 1px 3px 0px #00000033, 0px 2px 1px 0px #0000001F, 0px 1px 1px 0px #00000024;
-  --shadowSliderInput: 0px 1px 3px 0px #00000033, 0px 2px 1px 0px #0000001F, 0px 1px 4px 1px #0000002E;
-  --shadowLightBottom: 0px 2px 1px 0px #0000001F inset, 0px 1px 1px 0px #00000024 inset;
-  --gradientGroup: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.24) 80%, rgba(0, 0, 0, 0.4) 100%);
-  --gradientLight: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.24) 66%, rgba(0, 0, 0, 0.36) 100%);
-  --gradientLightBottom: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(24, 24, 24, 0.4) 100%);
-  --defaultFont: 18px;
-  --basicMargin: 24px;
-  --corners: 12px;
-}
-
 body {
-  background-color: var(--black);
+  background-color: #181818;
   margin: 0;
 }
 
@@ -31,7 +12,7 @@ h1 {
   line-height: 68px;
   letter-spacing: 0em;
   text-align: left;
-  color: var(--white);
+  color: #FFFFFF;
   cursor: default;
 }
 
@@ -41,9 +22,9 @@ h1 {
   max-height: 40px;
   width: 72px;
   border-radius: 20px;
-  background: var(--transparentBlack);
-  -webkit-box-shadow: var(--shadowInset);
-          box-shadow: var(--shadowInset);
+  background: #18181847;
+  -webkit-box-shadow: 0px 1px 3px 0px #00000033 inset, 0px 2px 1px 0px #0000001F inset, 0px 1px 1px 0px #00000024 inset;
+          box-shadow: 0px 1px 3px 0px #00000033 inset, 0px 2px 1px 0px #0000001F inset, 0px 1px 1px 0px #00000024 inset;
   padding: 4px;
   cursor: pointer;
 }
@@ -56,7 +37,7 @@ h1 {
   height: 32px;
   margin: 0;
   border-radius: 16px;
-  background: var(--white);
+  background: #FFFFFF;
   -webkit-box-shadow: 0px 1px 3px 0px #00000033, 0px 2px 1px 0px #0000001F, 0px 1px 1px 0px #00000024;
           box-shadow: 0px 1px 3px 0px #00000033, 0px 2px 1px 0px #0000001F, 0px 1px 1px 0px #00000024;
   -webkit-transition: -webkit-transform 0.1s ease-in-out;
@@ -77,9 +58,9 @@ h1 {
   max-height: 30px;
   width: 54px;
   border-radius: 15px;
-  background: var(--transparentBlack);
-  -webkit-box-shadow: var(--shadowInset);
-          box-shadow: var(--shadowInset);
+  background: #18181847;
+  -webkit-box-shadow: 0px 1px 3px 0px #00000033 inset, 0px 2px 1px 0px #0000001F inset, 0px 1px 1px 0px #00000024 inset;
+          box-shadow: 0px 1px 3px 0px #00000033 inset, 0px 2px 1px 0px #0000001F inset, 0px 1px 1px 0px #00000024 inset;
   padding: 3px;
   cursor: pointer;
 }
@@ -92,7 +73,7 @@ h1 {
   height: 24px;
   margin: 0;
   border-radius: 12px;
-  background: var(--white);
+  background: #FFFFFF;
   -webkit-box-shadow: 0px 1px 3px 0px #00000033, 0px 2px 1px 0px #0000001F, 0px 1px 1px 0px #00000024;
           box-shadow: 0px 1px 3px 0px #00000033, 0px 2px 1px 0px #0000001F, 0px 1px 1px 0px #00000024;
   -webkit-transition: -webkit-transform 0.1s ease-in-out;
@@ -111,7 +92,7 @@ h1 {
   margin: 0 auto 0 auto;
   width: 280px;
   height: 8px;
-  background: var(--transparentBlack);
+  background: #18181847;
   border-radius: 4px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -123,7 +104,8 @@ h1 {
   height: 8px;
   border-radius: 4px;
   margin-right: -50%;
-  background: var(--sliderLeftWhite);
+  background: -webkit-gradient(linear, left top, right top, from(rgba(255, 255, 255, 0.2)), to(rgba(255, 255, 255, 0.6)));
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.6) 100%);
 }
 
 .slider .sliderShadow {
@@ -132,8 +114,8 @@ h1 {
   height: 8px;
   border-radius: 4px;
   margin-right: -280px;
-  -webkit-box-shadow: var(--shadowInset);
-          box-shadow: var(--shadowInset);
+  -webkit-box-shadow: 0px 1px 3px 0px #00000033 inset, 0px 2px 1px 0px #0000001F inset, 0px 1px 1px 0px #00000024 inset;
+          box-shadow: 0px 1px 3px 0px #00000033 inset, 0px 2px 1px 0px #0000001F inset, 0px 1px 1px 0px #00000024 inset;
 }
 
 .slider input[type=range] {
@@ -154,19 +136,19 @@ h1 {
   appearance: none;
   width: 16px;
   height: 16px;
-  background: var(--white);
+  background: #FFFFFF;
   border-radius: 8px;
-  -webkit-box-shadow: var(--shadowSliderInput);
-          box-shadow: var(--shadowSliderInput);
+  -webkit-box-shadow: 0px 1px 3px 0px #00000033, 0px 2px 1px 0px #0000001F, 0px 1px 4px 1px #0000002E;
+          box-shadow: 0px 1px 3px 0px #00000033, 0px 2px 1px 0px #0000001F, 0px 1px 4px 1px #0000002E;
   cursor: pointer;
 }
 
 .slider input[type=range]::-moz-range-thumb {
   width: 16px;
   height: 16px;
-  background: var(--white);
+  background: #FFFFFF;
   border-radius: 8px;
-  box-shadow: var(--shadowSliderInput);
+  box-shadow: 0px 1px 3px 0px #00000033, 0px 2px 1px 0px #0000001F, 0px 1px 4px 1px #0000002E;
   cursor: pointer;
 }
 
@@ -185,8 +167,8 @@ h1 {
 }
 
 #header {
-  height: 104px;
-  background: var(--white);
+  height: 40px;
+  background: transparent;
   border-radius: 0 0 16px 16px;
 }
 
@@ -234,10 +216,10 @@ h1 {
   width: 152px;
   height: 118px;
   margin: 0 8px;
-  background: var(--black2);
-  border-radius: var(--corners);
-  -webkit-box-shadow: var(--shadowCard);
-          box-shadow: var(--shadowCard);
+  background: #272727;
+  border-radius: 12px;
+  -webkit-box-shadow: 0px 1px 3px 0px #00000033, 0px 2px 1px 0px #0000001F, 0px 1px 1px 0px #00000024;
+          box-shadow: 0px 1px 3px 0px #00000033, 0px 2px 1px 0px #0000001F, 0px 1px 1px 0px #00000024;
   padding: 20px 12px 16px 12px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -279,10 +261,10 @@ h1 {
   font-family: Arial;
   font-style: normal;
   font-weight: bold;
-  font-size: var(--defaultFont);
+  font-size: 18px;
   line-height: 22.5px;
   text-justify: center;
-  color: var(--white);
+  color: #FFFFFF;
 }
 
 #scenesWrapper #scenes .scene .sceneName span.word {
@@ -293,12 +275,12 @@ h1 {
   width: 112px;
   height: 16px;
   border-radius: 8px;
-  background: var(--white);
+  background: #FFFFFF;
 }
 
 #scenesWrapper #scenes .scene .sceneGradient .blurEffect {
-  -webkit-box-shadow: var(--shadowInset);
-          box-shadow: var(--shadowInset);
+  -webkit-box-shadow: 0px 1px 3px 0px #00000033 inset, 0px 2px 1px 0px #0000001F inset, 0px 1px 1px 0px #00000024 inset;
+          box-shadow: 0px 1px 3px 0px #00000033 inset, 0px 2px 1px 0px #0000001F inset, 0px 1px 1px 0px #00000024 inset;
   width: 100%;
   height: 100%;
   border-radius: 8px;
@@ -326,10 +308,10 @@ h1 {
   width: 320px;
   height: 88px;
   margin: 0px 8px 16px 8px;
-  border-radius: var(--corners);
-  background: var(--gradientGroup), #8DD3B5;
-  -webkit-box-shadow: var(--shadowCard);
-          box-shadow: var(--shadowCard);
+  border-radius: 12px;
+  background: #FFF;
+  -webkit-box-shadow: 0px 1px 3px 0px #00000033, 0px 2px 1px 0px #0000001F, 0px 1px 1px 0px #00000024;
+          box-shadow: 0px 1px 3px 0px #00000033, 0px 2px 1px 0px #0000001F, 0px 1px 1px 0px #00000024;
 }
 
 #zones .zone .blurEffect, #rooms .zone .blurEffect {
@@ -337,9 +319,10 @@ h1 {
           box-sizing: border-box;
   width: 320px;
   height: 88px;
+  border: solid 0px transparent;
+  border-radius: 12px;
   -webkit-backdrop-filter: blur(8px);
           backdrop-filter: blur(8px);
-  border-radius: var(--corners);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -375,9 +358,9 @@ h1 {
   font-family: Arial;
   font-style: normal;
   font-weight: bold;
-  font-size: var(--defaultFont);
+  font-size: 18px;
   line-height: 22.5px;
-  color: var(--white);
+  color: #FFFFFF;
   cursor: default;
 }
 
@@ -414,12 +397,12 @@ h1 {
   width: 152px;
   height: 240px;
   margin: 0 8px;
-  background: #8DD3B5;
+  background: #FFF;
   -webkit-transition: background-color 200ms linear;
   transition: background-color 200ms linear;
-  border-radius: var(--corners);
-  -webkit-box-shadow: var(--shadowCard);
-          box-shadow: var(--shadowCard);
+  border-radius: 12px;
+  -webkit-box-shadow: 0px 1px 3px 0px #00000033, 0px 2px 1px 0px #0000001F, 0px 1px 1px 0px #00000024;
+          box-shadow: 0px 1px 3px 0px #00000033, 0px 2px 1px 0px #0000001F, 0px 1px 1px 0px #00000024;
 }
 
 #lightsWrapper #lights .light .gradient {
@@ -427,8 +410,9 @@ h1 {
           box-sizing: border-box;
   width: 100%;
   height: 100%;
-  background: var(--gradientLight);
-  border-radius: var(--corners);
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), color-stop(66%, rgba(0, 0, 0, 0.24)), to(rgba(0, 0, 0, 0.36)));
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.24) 66%, rgba(0, 0, 0, 0.36) 100%);
+  border-radius: 12px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -468,7 +452,7 @@ h1 {
 #lightsWrapper #lights .light .gradient .top .icon {
   height: 48px;
   width: 48px;
-  fill: var(--white);
+  fill: #FFFFFF;
   stroke: none;
   stroke-width: 0;
 }
@@ -497,10 +481,10 @@ h1 {
   font-family: Arial;
   font-style: normal;
   font-weight: bold;
-  font-size: var(--defaultFont);
+  font-size: 18px;
   line-height: 22.5px;
   text-justify: center;
-  color: var(--white);
+  color: #FFFFFF;
   cursor: default;
 }
 
@@ -513,9 +497,9 @@ h1 {
   font-family: Arial;
   font-style: normal;
   font-weight: bold;
-  font-size: var(--defaultFont);
+  font-size: 18px;
   line-height: 22.5px;
-  color: var(--black2);
+  color: #272727;
   cursor: pointer;
 }
 
@@ -533,8 +517,8 @@ h1 {
 }
 
 #lightsWrapper #lights .light .gradient .top .hexCode:focus-within {
-  color: var(--black);
-  border-bottom: solid 2px var(--black);
+  color: #181818;
+  border-bottom: solid 2px #181818;
   margin-bottom: -2px;
 }
 
@@ -544,10 +528,11 @@ h1 {
   width: 100%;
   height: 84px;
   padding: 22px 40px;
-  background: var(--gradientLightBottom);
-  border-radius: 0 0 var(--corners) var(--corners);
-  -webkit-box-shadow: var(--shadowInset);
-          box-shadow: var(--shadowInset);
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.1)), to(rgba(24, 24, 24, 0.4)));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(24, 24, 24, 0.4) 100%);
+  border-radius: 0 0 12px 12px;
+  -webkit-box-shadow: 0px 1px 3px 0px #00000033 inset, 0px 2px 1px 0px #0000001F inset, 0px 1px 1px 0px #00000024 inset;
+          box-shadow: 0px 1px 3px 0px #00000033 inset, 0px 2px 1px 0px #0000001F inset, 0px 1px 1px 0px #00000024 inset;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
