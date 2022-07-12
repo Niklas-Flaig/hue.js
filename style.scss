@@ -304,7 +304,9 @@ h1 {
       height: 88px;
       border: solid 0px transparent;
       border-radius: $corners;
-      backdrop-filter: blur(8px);
+      &:before {
+        backdrop-filter: blur(8px);
+      }
 
       display: flex;
       flex-direction: column;

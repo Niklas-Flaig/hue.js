@@ -321,8 +321,6 @@ h1 {
   height: 88px;
   border: solid 0px transparent;
   border-radius: 12px;
-  -webkit-backdrop-filter: blur(8px);
-          backdrop-filter: blur(8px);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -334,6 +332,11 @@ h1 {
       -ms-flex-pack: justify;
           justify-content: space-between;
   padding: 16px 20px;
+}
+
+#zones .zone .blurEffect:before, #rooms .zone .blurEffect:before {
+  -webkit-backdrop-filter: blur(8px);
+          backdrop-filter: blur(8px);
 }
 
 #zones .zone .blurEffect .top, #rooms .zone .blurEffect .top {
