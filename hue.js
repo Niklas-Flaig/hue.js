@@ -63,40 +63,39 @@ doHTML("GET", res => { // needs to be executed after lights, because they are re
 }, "groups");
 
 
-function doHTML(command, content, urlAddition = "") {
-  if (window.XMLHttpRequest) {
-    const http = new XMLHttpRequest();
+async function doHTML(command, content, urlAddition = "") {
+  const url = `http://${env.ipAdress}/api/${env.key}/${urlAddition}`;
 
-    http.open(command, `http://${env.ipAdress}/api/${env.key}/${urlAddition}`, true);
+  let options;
+  switch (command) {
+    case "GET":
+      options = {
+        method: "GET",
+      };
+      break;
+    case "PUT":
+      options = {
+        method: "PUT",
+        body: content,
+      };
+      break;
+    default:
+      throw new Error(`Unsupported command: ${command}`);
+  }
 
-    switch (command) {
-      case "GET":
-        http.send(null);
+  try {
+    const response = await fetch(url, options);
 
-        http.onreadystatechange = () => {
-          if (http.readyState === 4) {
-            if (http.status === 200) {
-              content(JSON.parse(http.responseText));
-            } else {
-              console.log("Error " + http.status);
-            }
-          }
-        };
-        break;
-      case "PUT":
-        http.send(content);
-      
-        http.onreadystatechange = () => {
-          if (http.readyState === 4) {
-            if (http.status === 200) {
-              // console.log(http.responseText);
-            } else {
-              console.log("Error " + http.status);
-            }
-          }
-        };
-        break;
+    if (response.ok) {
+      if (command === "GET") {
+        const data = await response.json();
+        content(data);
+      }
+    } else {
+      console.log(`Error ${response.status}`);
     }
+  } catch (error) {
+    console.error(error);
   }
 }
 
